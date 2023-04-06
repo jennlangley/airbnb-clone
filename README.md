@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![Airbnb schema](https://user-images.githubusercontent.com/106412948/230506306-68b54393-77cf-4720-ba9e-ded4293a62c4.png)
+![Airbnb schema](https://user-images.githubusercontent.com/106412948/230510759-903b2b0c-0c94-4e39-b199-72809d6b9c59.png)
 
 ## API Documentation
 
@@ -93,7 +93,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /session
+  * URL: /users/login
   * Headers:
     * Content-Type: application/json
   * Body:
