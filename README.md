@@ -1,4 +1,4 @@
-# AirBnB 
+# AirBnB Project
 
 ## Database Schema Design
 
