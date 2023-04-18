@@ -4,6 +4,7 @@ const { Spot, User } = require('../../db/models');
 const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
+const { requireAuth } = require('../../utils/auth');
 
 const validateSpot = [
     check ('address')
@@ -37,7 +38,8 @@ const validateSpot = [
     handleValidationErrors
 ];
 
-router.get('/current', async (req, res) => {
+// Get all Spots owned by the Current User
+router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
     const ownerId = user.id;
     const spots = await Spot.findAll({
@@ -46,6 +48,7 @@ router.get('/current', async (req, res) => {
     return res.json({Spots: spots});
 })
 
+// Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId
     const spot = await Spot.findOne({
@@ -63,7 +66,8 @@ router.get('/:spotId', async (req, res, next) => {
     return res.json(spot);
 })
 
-router.post('', validateSpot, async (req, res) => {
+// Create a Spot
+router.post('', requireAuth, validateSpot, async (req, res) => {
     const { user } = req;
     const ownerId = user.id;
     const { address, city, state, country, 
@@ -78,6 +82,7 @@ router.post('', validateSpot, async (req, res) => {
     // }
 })
 
+// Get all Spots
 router.get('', async (req, res) => {
     const allSpots = await Spot.findAll();
     return res.json(allSpots);
