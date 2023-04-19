@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Spot, User, SpotImage } = require('../../db/models');
+const { Spot, User, SpotImage, Review } = require('../../db/models');
 const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
@@ -66,32 +66,42 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         err.status = 404;
         err.message = 'Spot couldn\'t be found';
         return next(err);
-    }
+    };
     if (spot.ownerId !== ownerId) {
         const err = new Error('Proper authorization required');
         err.title = 'User must be spot owner';
         err.status = 400;
         err.message = 'Spot must belong to the current user';
         return next(err);
-    }
+    };
     const image = await SpotImage.create({
         spotId, url, preview
     });
-    const imageId = image.id
+    const imageId = image.id;
     const spotImage = await SpotImage.scope('defaultScope').findOne({
         where: {id: imageId}
     });
-    return res.json(spotImage)
+    return res.json(spotImage);
 })
+
+// Create a Review for a Spot
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    const { user } = req;
+    const userId = user.id;
+    const spotId = +req.params.spotId;
+    const { review, stars } = req.body;
+    const newReview = await Review.create({ userId, spotId, review, stars });
+    return res.json(newReview);
+});
 
 // Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
-    const spotId = req.params.spotId
+    const spotId = req.params.spotId;
     const spot = await Spot.findOne({
         where: {id: spotId},
         // attributes: [[Sequelize.fn('AVERAGE')]],
         include: [{model: User, as: 'Owner'}]
-    })
+    });
     if (!spot) {
         const err = new Error('Spot couldn\'t be found');
         err.title = 'Spot couldn\'t be found';
@@ -100,7 +110,7 @@ router.get('/:spotId', async (req, res, next) => {
         return next(err);
     }
     return res.json(spot);
-})
+});
 
 // Create a Spot
 router.post('', requireAuth, validateSpot, async (req, res) => {
@@ -111,17 +121,12 @@ router.post('', requireAuth, validateSpot, async (req, res) => {
     const latLng = `${lat}, ${lng}`;
     const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
     return res.json(spot);
-    // if (user) {
-
-    // } else {
-        
-    // }
-})
+});
 
 // Get all Spots
 router.get('', async (req, res) => {
     const allSpots = await Spot.findAll();
     return res.json(allSpots);
-})
+});
 
 module.exports = router;
