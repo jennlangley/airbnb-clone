@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Spot, User, SpotImage, Review } = require('../../db/models');
+const { Spot, User, SpotImage, Review, ReviewImage } = require('../../db/models');
 const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
@@ -38,6 +38,17 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+const validateReview = [
+    check ('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check ('stars')
+        .exists({ checkFalsy: true })
+        .isInt({min: 1, max: 5})
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
+
 // Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
@@ -62,15 +73,13 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     });
     if (!spot) {
         const err = new Error('Spot couldn\'t be found');
-        err.title = 'Spot couldn\'t be found';
         err.status = 404;
         err.message = 'Spot couldn\'t be found';
         return next(err);
     };
     if (spot.ownerId !== ownerId) {
         const err = new Error('Proper authorization required');
-        err.title = 'User must be spot owner';
-        err.status = 400;
+        err.status = 403;
         err.message = 'Spot must belong to the current user';
         return next(err);
     };
@@ -85,7 +94,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 })
 
 // Create a Review for a Spot
-router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
     const { user } = req;
     const userId = user.id;
     const spotId = +req.params.spotId;
@@ -104,12 +113,73 @@ router.get('/:spotId', async (req, res, next) => {
     });
     if (!spot) {
         const err = new Error('Spot couldn\'t be found');
-        err.title = 'Spot couldn\'t be found';
         err.status = 404;
         err.message = 'Spot couldn\'t be found';
         return next(err);
     }
     return res.json(spot);
+});
+
+// Edit a Spot
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+    const { user } = req;
+    const ownerId = user.id;
+    const spotId = +req.params.spotId;
+    const spot = await Spot.findOne({
+        where: {id: spotId},
+    });
+    if (!spot) {
+        const err = new Error('Spot couldn\'t be found');
+        err.status = 404;
+        err.message = 'Spot couldn\'t be found';
+        return next(err);
+    };
+    if (spot.ownerId !== ownerId) {
+        const err = new Error('Proper authorization required');
+        err.status = 403;
+        err.message = 'Spot must belong to the current user';
+        return next(err);
+    };
+    const { address, city, state, country, 
+        lat, lng, name, description, price } = req.body;
+    const editedSpot = await spot.update({ address, city, state, country, lat, lng, name, description, price });
+    return res.json(editedSpot);
+});
+
+// Delete a Spot
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    const ownerId = user.id;
+    const spotId = +req.params.spotId;
+    const spot = await Spot.findOne({
+        where: {id: spotId},
+    });
+    if (!spot) {
+        const err = new Error('Spot couldn\'t be found');
+        err.status = 404;
+        err.message = 'Spot couldn\'t be found';
+        return next(err);
+    };
+    if (spot.ownerId !== ownerId) {
+        const err = new Error('Proper authorization required');
+        err.status = 403;
+        err.message = 'Spot must belong to the current user';
+        return next(err);
+    };
+    await spot.destroy();
+    return res.json({
+        message: "Successfully deleted",
+        statusCode: 200
+    });
+})
+
+// Get Reviews by SpotId
+router.get('/:spotId/reviews', async (req, res) => {
+    const spot = await Spot.findOne({
+        where: {id: +req.params.spotId},
+        include: [{model: Review, include: [{model: ReviewImage}]}]
+    });
+    return res.json({Reviews: spot.Reviews});
 });
 
 // Create a Spot
