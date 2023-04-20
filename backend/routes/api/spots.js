@@ -94,10 +94,28 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 })
 
 // Create a Review for a Spot
-router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
     const { user } = req;
     const userId = user.id;
     const spotId = +req.params.spotId;
+    const spot = await Spot.findOne({
+        where: {id: spotId}
+    });
+    if (!spot) {
+        const err = new Error('Spot couldn\'t be found');
+        err.status = 404;
+        err.message = 'Spot couldn\'t be found';
+        return next(err);
+    };
+    const userReview = await Review.findOne({
+        where: {userId: userId, spotId: spotId}
+    });
+    if (userReview) {
+        const err = new Error('User already has a review for this spot');
+        err.status = 403;
+        err.message = 'User already has a review for this spot';
+        return next(err);
+    };
     const { review, stars } = req.body;
     const newReview = await Review.create({ userId, spotId, review, stars });
     return res.json(newReview);
@@ -116,7 +134,7 @@ router.get('/:spotId', async (req, res, next) => {
         err.status = 404;
         err.message = 'Spot couldn\'t be found';
         return next(err);
-    }
+    };
     return res.json(spot);
 });
 
@@ -196,7 +214,14 @@ router.post('', requireAuth, validateSpot, async (req, res) => {
 // Get all Spots
 router.get('', async (req, res) => {
     const allSpots = await Spot.findAll();
-    return res.json(allSpots);
+    return res.json({Spots: allSpots});
+
+    // const allSpots = await Spot.findAll({
+    //     attributes: {include: [[sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]},
+    //     include: [{model: Review, attributes: []}, {model: SpotImage, as: 'previewImage', attributes: ['url']}]
+    // });
+    // return res.json(allSpots);
+
 });
 
 module.exports = router;
