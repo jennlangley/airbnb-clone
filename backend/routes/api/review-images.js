@@ -13,7 +13,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const image = await ReviewImage.scope('reviewScope').findOne({
         where: {id: imageId}
     });
-    console.log(image);
+    
     if (!image) {
         const err = new Error('Review Image couldn\'t be found');
         err.status = 404;
@@ -24,13 +24,16 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const review = await Review.findOne({
         where: {id: image.dataValues.reviewId}
     });
+
     if (user.id !== review.userId) {
         const err = new Error('Proper authorization required');
         err.status = 403;
         err.message = 'User must be review author';
         return next(err);
     };
+
     await image.destroy();
+
     return res.json({
         message: "Successfully deleted",
         statusCode: 200

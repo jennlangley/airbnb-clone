@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Spot, User, SpotImage, Review, ReviewImage } = require('../../db/models');
+const { Spot, User, SpotImage, Review, ReviewImage, Sequelize, sequelize } = require('../../db/models');
 const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
@@ -127,7 +127,7 @@ router.get('/:spotId', async (req, res, next) => {
     const spot = await Spot.findOne({
         where: {id: spotId},
         // attributes: [[Sequelize.fn('AVERAGE')]],
-        include: [{model: User, as: 'Owner'}]
+        include: [{model: SpotImage}, {model: User, as: 'Owner'}]
     });
     if (!spot) {
         const err = new Error('Spot couldn\'t be found');
@@ -192,11 +192,25 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 })
 
 // Get Reviews by SpotId
-router.get('/:spotId/reviews', async (req, res) => {
+router.get('/:spotId/reviews', async (req, res, next) => {
     const spot = await Spot.findOne({
         where: {id: +req.params.spotId},
-        include: [{model: Review, include: [{model: ReviewImage}]}]
+        include: [{
+            model: Review, 
+            include: [{model: User, 
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage
+            }]
+        }]
     });
+    if (!spot) {
+        const err = new Error('Spot couldn\'t be found');
+        err.status = 404;
+        err.message = 'Spot couldn\'t be found';
+        return next(err);
+    };
     return res.json({Reviews: spot.Reviews});
 });
 
@@ -207,20 +221,31 @@ router.post('', requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, 
     lat, lng, name, description, price } = req.body;
     const latLng = `${lat}, ${lng}`;
+    check('latLng')
+        .isLatLong(latLng)
+        .withMessage('Not a valid latitude longitude coordinate'),
+        handleValidationErrors
     const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
     return res.json(spot);
 });
 
 // Get all Spots
 router.get('', async (req, res) => {
-    const allSpots = await Spot.findAll();
-    return res.json({Spots: allSpots});
+    // const allSpots = await Spot.findAll();
+    // return res.json({Spots: allSpots});
 
-    // const allSpots = await Spot.findAll({
-    //     attributes: {include: [[sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]},
-    //     include: [{model: Review, attributes: []}, {model: SpotImage, as: 'previewImage', attributes: ['url']}]
-    // });
-    // return res.json(allSpots);
+    const allSpots = await Spot.findAll({
+        include: [{
+            model: Review,
+            attributes: [[sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']]
+            }, 
+            {
+            model: SpotImage, 
+            attributes: ['url']
+            }],
+        group: ['Spot.id']
+    });
+    return res.json(allSpots);
 
 });
 
