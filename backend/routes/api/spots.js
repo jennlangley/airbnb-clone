@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Spot, User, SpotImage, Review, ReviewImage, sequelize } = require('../../db/models');
+const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
@@ -119,6 +119,47 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     const { review, stars } = req.body;
     const newReview = await Review.create({ userId, spotId, review, stars });
     return res.json(newReview);
+});
+
+// Create a booking based on a Spots id
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    const ownerId = user.id;
+    const spotId = +req.params.spotId;
+    const spot = await Spot.findOne({
+        where: {id: spotId},
+    });
+    if (!spot) {
+        const err = new Error('Spot couldn\'t be found');
+        err.status = 404;
+        err.message = 'Spot couldn\'t be found';
+        return next(err);
+    };
+    if (spot.ownerId === ownerId) {
+        const err = new Error('Proper authorization required');
+        err.status = 403;
+        err.message = 'Spot must NOT belong to the current user';
+        return next(err);
+    };
+    const { startDate, endDate } = req.body;
+    if (startDate >= endDate) {
+
+    };
+    const alreadyBooked = await Booking.findAll({
+        where: {
+            "startDate": {
+
+            }
+        }
+    });
+    if (alreadyBooked) {
+        const err = new Error();
+        err.status = 403;
+        err.message = 'Sorry, this spot is already booked for the specified dates';
+        return next(err);
+    };
+    const booking = await Booking.create({spotId, userId, startDate, endDate});
+    return res.json(booking);
 });
 
 // Get details of a Spot from an id

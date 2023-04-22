@@ -7,13 +7,16 @@ const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 
 // Get all current User's bookings
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
     const userId = +user.id;
-    const bookings = Booking.findAll({
-        // where: {userId: userId}
+    const bookings = await Booking.findAll({
+        where: {userId: userId},
+        include: {model: Spot.scope('booking')}
     });
     return res.json(bookings)
 })
+
+
 
 module.exports = router;
