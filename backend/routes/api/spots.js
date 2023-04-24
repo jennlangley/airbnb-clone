@@ -150,7 +150,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     };
     const alreadyBooked = await Booking.findAll({
         where: {
-            spodId: spotId,
+            spotId: spotId,
             [Op.and]: {
                 startDate: {
                     [Op.gte]: startDate
