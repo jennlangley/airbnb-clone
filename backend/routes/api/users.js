@@ -72,6 +72,7 @@ router.post('', validateSignup, async (req, res) => {
 // Get the current User
 router.get('/current', async (req, res) => {
   const { user } = req;
+  console.log(user.xsrftoken)
     if (user) {
     const safeUser = {
         id: user.id,

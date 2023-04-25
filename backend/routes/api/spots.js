@@ -205,8 +205,12 @@ router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
     const spot = await Spot.findOne({
         where: {id: spotId},
-        // attributes: [[Sequelize.fn('AVERAGE')]],
-        include: [{model: SpotImage}, {model: User, as: 'Owner'}]
+        include: [
+            {model: Review, attributes: [[sequelize.fn('AVG', sequelize.col("Reviews.stars")), "avgRating"]]},
+            {model: SpotImage}, 
+            {model: User, as: 'Owner', attributes: ["id", "firstName", "lastName"]}
+        ],
+        group: Spot.id
     });
     if (!spot) {
         const err = new Error('Spot couldn\'t be found');
