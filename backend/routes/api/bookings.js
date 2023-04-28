@@ -11,13 +11,17 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
     const userId = +user.id;
     const bookings = await Booking.findAll({
-        where: {userId: userId},
-        include: {model: Spot.scope('booking'), 
-            include: {
-                model: SpotImage, attributes: ['url'], where: {preview: true}
-            }
-        }, 
+        where: {userId: userId}
     });
+    for (let i = 0; i < bookings.length; i++) {
+        const booking = bookings[i];
+        const spot = await booking.getSpot();
+        const previewImage = await spot.getSpotImages({
+            where: {preview: true}
+        });
+        spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        booking.dataValues.Spot = spot;
+    }
     return res.json({Bookings: bookings});
 });
 
