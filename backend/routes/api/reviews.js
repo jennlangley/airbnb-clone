@@ -21,15 +21,24 @@ const validateReview = [
 router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
     const userId = user.id;
+    // const reviews = await Review.findAll({
+    //     where: {userId: userId},
+    //     include: [
+    //         {model: User}, 
+    //         {model: Spot, include: {
+    //             model: SpotImage, attributes: ['url'], where: {preview: true},
+    //         }}, 
+    //         {model: ReviewImage}]
+    // });
     const reviews = await Review.findAll({
-        where: {userId: userId},
-        include: [
-            {model: User}, 
-            {model: Spot.scope('booking'), include: {
-                model: SpotImage, attributes: ['url'], where: {preview: true},
-            }}, 
-            {model: ReviewImage}]
+        where: {userId: userId}
     });
+    for (let i = 0; i < reviews.length; i++) {
+        const review = reviews[i];
+        review.dataValues.User = await review.getUser();
+        review.dataValues.Spot = await review.getSpot();
+        
+    }
     return res.json({Reviews: reviews});
 });
 

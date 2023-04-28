@@ -59,12 +59,13 @@ router.post('', validateSignup, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       username: user.username,
+      token: req.cookies['XSRF-TOKEN']
     };
 
     await setTokenCookie(res, safeUser);
-
+   
     return res.json({
-      user: safeUser
+      user: safeUser,
     });
   }
 );
@@ -72,7 +73,6 @@ router.post('', validateSignup, async (req, res) => {
 // Get the current User
 router.get('/current', async (req, res) => {
   const { user } = req;
-  console.log(user.xsrftoken)
     if (user) {
     const safeUser = {
         id: user.id,
@@ -114,6 +114,7 @@ router.post('/login', validateLogin, async (req, res, next) => {
   lastName: user.lastName,
   email: user.email,
   username: user.username,
+  token: req.cookies['XSRF-TOKEN']
   };
 
   await setTokenCookie(res, safeUser);

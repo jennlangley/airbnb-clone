@@ -18,7 +18,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         }, 
     });
-    return res.json(bookings);
+    return res.json({Bookings: bookings});
 });
 
 // Edit a booking
