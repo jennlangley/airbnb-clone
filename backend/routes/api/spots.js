@@ -333,6 +333,17 @@ router.post('', requireAuth, validateSpot, async (req, res) => {
 
 // Get all Spots
 router.get('', async (req, res) => {
+    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+    let pagination = {}
+    if (!page) query.page = 0;
+    if (!size) query.size = 20;
+    page = parseInt(page);
+    size = parseInt(size);
+    if (page >= 0 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * page; 
+    };
+
     const spots = await Spot.findAll();
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i];
