@@ -96,7 +96,6 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     };
     const spotId = booking.spotId;
     const spot = await Spot.findByPk(spotId);
-    console.log("booking userId: ", booking.userId, "userId: ", user.id)
     if (currentDate > booking.startDate) {
         const err = new Error('Bookings that have been started can\'t be deleted');
         err.status = 400;
