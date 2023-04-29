@@ -266,7 +266,7 @@ router.get('/:spotId', async (req, res, next) => {
             [[sequelize.fn('AVG', sequelize.col('stars')), 'avgStarRating'], 
             [sequelize.fn('COUNT', sequelize.col('id')), 'numReviews']],
     });
-    spot.dataValues.numReviews = reviews[0].dataValues.numReviews;
+    spot.dataValues.numReviews = +reviews[0].dataValues.numReviews;
     spot.dataValues.avgStarRating = Math.round(10*(reviews[0].dataValues.avgStarRating))/10;
     const spotImages = await spot.getSpotImages();
     spot.dataValues.SpotImages = spotImages;
