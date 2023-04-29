@@ -3,7 +3,9 @@ const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // define association here
+      User.hasMany(models.Spot, {as: 'Owner', foreignKey: 'ownerId', onDelete: 'CASCADE'});
+      User.hasMany(models.Review, {foreignKey: 'userId'});
+      User.hasMany(models.Booking, {foreignKey: 'userId'});
     }
   };
 
@@ -50,6 +52,13 @@ module.exports = (sequelize, DataTypes) => {
     defaultScope: {
       attributes: {
         exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+      }
+    },
+    scopes: {
+      reviewScope: {
+        attributes: {
+          exclude: ["username", "hashedPassword", "email", "createdAt", "updatedAt"]
+        }
       }
     }
   });
