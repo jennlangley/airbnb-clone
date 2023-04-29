@@ -21,9 +21,11 @@ const validateSpot = [
         .withMessage('Country is required'),
     check('lat')
         .exists({ checkFalsy: true })
+        .isInt({min: -90, max: 90})
         .withMessage('Latitude is not valid'),
     check('lng')
         .exists({ checkFalsy: true })
+        .isInt({min: -180, max: 180})
         .withMessage('Longitude is not valid'),
     check('name')
         .exists({ checkFalsy: true })
@@ -48,6 +50,42 @@ const validateReview = [
         .withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ];
+
+const validateQuery = [
+    check('page')
+        .isInt({min: 0})
+        .withMessage('Page must be greater than or equal to 0')
+        .optional({ nullable: true }),
+    check('size')
+        .isInt({min: 0})
+        .withMessage('Size must be greater than or equal to 0')
+        .optional({ nullable: true }),
+    check('maxLat')
+        .isInt({min: -90, max: 90})
+        .withMessage('Maximum latitude is invalid')
+        .optional({ nullable: true }),
+    check('minLat')
+        .isInt({min: -90, max: 90})
+        .withMessage('Minimum latitude is invalid')
+        .optional({ nullable: true }),
+    check('maxLng')
+        .isInt({min: -180, max: 180})
+        .withMessage('Maximum longitude is invalid')
+        .optional({ nullable: true }),
+    check('minLng')
+        .isInt({min: -180, max: 180})
+        .withMessage('Maximum longitude is invalid')
+        .optional({ nullable: true }),
+    check('maxPrice')
+        .isInt({min: 0})
+        .withMessage('Maximum price must be greater than or equal to 0')
+        .optional({ nullable: true }),
+    check('minPrice')
+        .isInt({min: 0})
+        .withMessage('Minimum price must be greater than or equal to 0')
+        .optional({ nullable: true }),
+    handleValidationErrors
+]
 
 // Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
@@ -231,7 +269,6 @@ router.get('/:spotId', async (req, res, next) => {
     spot.dataValues.numReviews = reviews[0].dataValues.numReviews;
     spot.dataValues.avgStarRating = Math.round(10*(reviews[0].dataValues.avgStarRating))/10;
     const spotImages = await spot.getSpotImages();
-    console.log(spotImages)
     spot.dataValues.SpotImages = spotImages;
     const owner = await spot.getOwner({
         attributes: ['id', 'firstName', 'lastName']
@@ -332,19 +369,41 @@ router.post('', requireAuth, validateSpot, async (req, res) => {
 });
 
 // Get all Spots
-router.get('', async (req, res) => {
+router.get('', validateQuery, async (req, res) => {
     let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
     let pagination = {}
-    if (!page) query.page = 0;
-    if (!size) query.size = 20;
+    if (!page) page = 0;
+    if (!size) size = 20;
     page = parseInt(page);
     size = parseInt(size);
     if (page >= 0 && size >= 1) {
         pagination.limit = size;
-        pagination.offset = size * page; 
+        if (page === 0) {
+            pagination.offset = size * page; 
+        } else {
+            pagination.offset = size;
+        };
     };
+    const where = {}
+    if (minLat && maxLat) where.lat = {[Op.gte]: minLat, [Op.lte]: maxLat};
+    else if (minLat) where.lat = {[Op.gte]: minLat};
+    else if (maxLat) where.lat = {[Op.lte]: maxLat};
 
-    const spots = await Spot.findAll();
+    if (minLng && maxLng) where.lng = {[Op.gte]: minLng, [Op.lte]: maxLng};
+    else if (minLng) where.lng = {[Op.gte]: minLng};
+    else if (maxLng) where.lng = {[Op.lte]: maxLng};
+
+    if (minPrice && maxPrice) where.price = {[Op.gte]: minPrice, [Op.lte]: maxPrice}
+    else if (minPrice) where.price = {[Op.gte]: minPrice}
+    else if (maxPrice) where.price = {[Op.lte]: maxPrice}
+            
+    const spots = await Spot.findAll({
+        where: {
+            [Op.and]: {...where}
+        },
+        ...pagination
+    });
+   
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i];
         const reviews = await spot.getReviews({
@@ -359,7 +418,12 @@ router.get('', async (req, res) => {
         });
         spot.dataValues.previewImage = previewImage[0].dataValues.url;
     };
-    return res.json(spots);
+    const Spots = {
+        Spots: spots,
+        page: page,
+        size: size
+    }
+    return res.json(Spots);
 });
 
 module.exports = router;
