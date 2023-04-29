@@ -31,7 +31,8 @@ router.get('/current', requireAuth, async (req, res) => {
         const previewImage = await spot.getSpotImages({
             where: {preview: true}
         });
-        spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        if (previewImage.length) spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        else spot.dataValues.previewImage = "";
         review.dataValues.Spot = spot;
         review.dataValues.ReviewImages = await review.getReviewImages();
     }
@@ -63,13 +64,13 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         return next(err);
     };
 
-    const numImgs = await ReviewImage.findOne({
+    const numImgs = await ReviewImage.findAll({
         where: {
             reviewId: reviewId
         },
-        attributes: [[sequelize.fn('COUNT'), 'countImages']]
+        attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'countImages']]
     })
-    if (numImgs.dataValues.countImages >= 10) {
+    if (numImgs[0].dataValues.countImages >= 10) {
         const err = new Error('Maximum number of images for this resource was reached');
         err.status = 403;
         err.message = 'Maximum number of images for this resource was reached';

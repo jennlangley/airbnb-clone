@@ -21,11 +21,11 @@ const validateSpot = [
         .withMessage('Country is required'),
     check('lat')
         .exists({ checkFalsy: true })
-        .isInt({min: -90, max: 90})
+        .isFloat({min: -90, max: 90})
         .withMessage('Latitude is not valid'),
     check('lng')
         .exists({ checkFalsy: true })
-        .isInt({min: -180, max: 180})
+        .isFloat({min: -180, max: 180})
         .withMessage('Longitude is not valid'),
     check('name')
         .exists({ checkFalsy: true })
@@ -61,27 +61,27 @@ const validateQuery = [
         .withMessage('Size must be greater than or equal to 0')
         .optional({ nullable: true }),
     check('maxLat')
-        .isInt({min: -90, max: 90})
+        .isFloat({min: -90, max: 90})
         .withMessage('Maximum latitude is invalid')
         .optional({ nullable: true }),
     check('minLat')
-        .isInt({min: -90, max: 90})
+        .isFloat({min: -90, max: 90})
         .withMessage('Minimum latitude is invalid')
         .optional({ nullable: true }),
     check('maxLng')
-        .isInt({min: -180, max: 180})
+        .isFloat({min: -180, max: 180})
         .withMessage('Maximum longitude is invalid')
         .optional({ nullable: true }),
     check('minLng')
-        .isInt({min: -180, max: 180})
+        .isFloat({min: -180, max: 180})
         .withMessage('Maximum longitude is invalid')
         .optional({ nullable: true }),
     check('maxPrice')
-        .isInt({min: 0})
+        .isFloat({min: 0})
         .withMessage('Maximum price must be greater than or equal to 0')
         .optional({ nullable: true }),
     check('minPrice')
-        .isInt({min: 0})
+        .isFloat({min: 0})
         .withMessage('Minimum price must be greater than or equal to 0')
         .optional({ nullable: true }),
     handleValidationErrors
@@ -106,7 +106,8 @@ router.get('/current', requireAuth, async (req, res) => {
         const previewImage = await spot.getSpotImages({
             where: {preview: true}
         });
-        spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        if (previewImage.length) spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        else spot.dataValues.previewImage = "";
     };
     return res.json({Spots: spots});
 })
@@ -409,7 +410,8 @@ router.get('', validateQuery, async (req, res) => {
         const previewImage = await spot.getSpotImages({
             where: {preview: true}
         });
-        spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        if (previewImage.length) spot.dataValues.previewImage = previewImage[0].dataValues.url;
+        else spot.dataValues.previewImage = "";
     };
     const Spots = {
         Spots: spots,
