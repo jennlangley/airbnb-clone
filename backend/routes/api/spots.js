@@ -372,11 +372,7 @@ router.get('', validateQuery, async (req, res) => {
     size = parseInt(size);
     if (page >= 0 && size >= 1) {
         pagination.limit = size;
-        if (page === 0) {
-            pagination.offset = size * page; 
-        } else {
-            pagination.offset = size;
-        };
+        pagination.offset = size * page; 
     };
     const where = {}
     if (minLat && maxLat) where.lat = {[Op.gte]: minLat, [Op.lte]: maxLat};
