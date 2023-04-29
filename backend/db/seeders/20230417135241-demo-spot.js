@@ -32,19 +32,19 @@ module.exports = {
         lng: '120',
         name: 'Fake is Great',
         description: 'This amazing getaway is so unreal, it\'s fake!',
-        price: '444.44',     
+        price: '125.00',     
       },
       {
         ownerId: 3,
-        address: '985 Dollhouse Rd',
+        address: '404 Not Real Rd',
         city: 'Las Vegas',
         state: 'NV',
         country: 'United States of America',
         lat: '32.44',
         lng: '56.21',
         name: 'The Dollhouse',
-        description: 'The one and only dollhouse, constructed within a warehouse. Once in a lifetime opportunity!',
-        price: '999.99',  
+        description: 'The one and only replica house which you can\'t wait to not see!',
+        price: '600.50',  
       }
     ], {});
   },
