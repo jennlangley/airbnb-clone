@@ -21,10 +21,6 @@ router.use('/bookings', bookingsRouter);
 
 const { requireAuth } = require('../../utils/auth.js');
 
-router.post('/test', (req, res) => {
-    res.json({ requestBody: req.body });
-  });
-
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
     where: {
