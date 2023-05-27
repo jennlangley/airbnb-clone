@@ -21,20 +21,16 @@ export const setSession = (user) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify(user)
     });
-    if (response.ok) {
-        const session = await response.json();
-        dispatch(setSessionAction(user));
-        return session;
-    };
+    const session = await response.json();
+    dispatch(setSessionAction(session.user));
+    return session.user;
 };
 
 export const restoreSession = () => async (dispatch) => {
     const response = await csrfFetch('/api/session');
-    if (response.ok) {
-        const session = await response.json();
-        dispatch(setSessionAction(session.user));
-        return response;
-    };
+    const session = await response.json();
+    dispatch(setSessionAction(session.user));
+    return response;
 }
 
 export const signupUser = (user) => async (dispatch) => {
@@ -42,21 +38,18 @@ export const signupUser = (user) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify(user)
     });
-    if (response.ok) {
-        const session = await response.json();
-        dispatch(setSessionAction(session.user));
-        return session.user;
-    };
+    const session = await response.json();
+    dispatch(setSessionAction(session.user));
+    return session.user;
+    
 };
 
 export const logoutUser = () => async (dispatch) => {
     const response = await csrfFetch('/api/session', {
         method: 'DELETE'
     });
-    if (response.ok) {
-        dispatch(removeSessionAction());
-        return response;
-    };
+    dispatch(removeSessionAction());
+    return response;
 };
 
 const sessionReducer = (state = {user: null}, action) => {

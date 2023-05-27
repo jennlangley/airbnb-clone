@@ -19,7 +19,7 @@ const Navigation = ({ isLoaded }) => {
                 <NavLink to='/signup'>Sign Up</NavLink>
             </li>
         );
-    };
+    }
 
     return (
         <ul>
@@ -29,6 +29,6 @@ const Navigation = ({ isLoaded }) => {
             {isLoaded && sessionLinks}
         </ul>
     );
-};
+}
 
 export default Navigation;
