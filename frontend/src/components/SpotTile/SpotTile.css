@@ -1,0 +1,11 @@
+.spotImage {
+    width: 300px;
+}
+
+.spotLocationPrice {
+    display: flex;
+}
+.spotRating {
+    display: flex;
+}
+
