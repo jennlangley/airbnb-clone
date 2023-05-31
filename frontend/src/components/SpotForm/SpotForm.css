@@ -1,3 +1,13 @@
+.spotFormContainer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 .spotForm {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
     font-family: sans-serif;
+    padding: auto;
+    width: 500px;
 }

@@ -46,9 +46,9 @@ const SpotForm = () => {
     };
 
     return (
-        <div className='spotForm'>
-            <h1>Create a new Spot</h1>
-            <form onSubmit={handleSubmit}>
+        <div className='spotFormContainer'>
+            <form onSubmit={handleSubmit} className='spotForm'>
+                <h1>Create a new Spot</h1>
                 <h2>Where's your place located?</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
                 <label>Country</label>

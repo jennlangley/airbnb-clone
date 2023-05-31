@@ -2,8 +2,6 @@
     display: none;
     
 }
-.navigation {
-    display: flex;
-    flex-direction: row;
+.navigationList, .profile-dropdown {
     list-style: none;
 }
