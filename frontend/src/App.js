@@ -5,13 +5,17 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
+import SpotForm from "./components/SpotForm/SpotForm";
+import SpotDetail from "./components/SpotDetail/SpotDetail";
 import * as sessionActions from './store/session';
+import * as spotsActions from './store/spots';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(sessionActions.restoreSession()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreSession())
+    dispatch(spotsActions.loadAllSpots()).then(() => setIsLoaded(true));
   }, [dispatch]);
   
   return (
@@ -27,6 +31,12 @@ function App() {
           </Route>
           <Route exact path='/'>
             <LandingPage />
+          </Route>
+          <Route path='/spots/new'>
+            <SpotForm />
+          </Route>
+          <Route path='/spots/:spotId'>
+            <SpotDetail />
           </Route>
         </Switch>
       )}

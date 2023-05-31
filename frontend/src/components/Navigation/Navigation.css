@@ -4,5 +4,6 @@
 }
 .navigation {
     display: flex;
+    flex-direction: row;
     list-style: none;
 }

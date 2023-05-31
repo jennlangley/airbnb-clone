@@ -2,10 +2,10 @@
     width: 300px;
 }
 
-.spotLocationPrice {
-    display: flex;
-}
-.spotRating {
-    display: flex;
-}
 
+.spotInfo {
+    display: -ms-inline-grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: minmax(auto, auto);
+
+}
