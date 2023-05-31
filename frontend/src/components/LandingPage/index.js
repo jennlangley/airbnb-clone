@@ -6,8 +6,8 @@ import './LandingPage.css'
 const LandingPage = () => {
     const spots = useSelector(state => state.spots)
     return (
-        <div class="spotTiles">
-        {Object.values(spots).map(spot => <SpotTile spot={spot}/>)}
+        <div className="spotTiles">
+        {Object.values(spots).map(spot => <SpotTile key={spot.id} spot={spot}/>)}
         </div>
     );
 }

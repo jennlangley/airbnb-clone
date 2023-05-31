@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 const SpotDetail = () => {
     const { spotId } = useParams()
     const spot = useSelector(state => state.spots[+spotId])
