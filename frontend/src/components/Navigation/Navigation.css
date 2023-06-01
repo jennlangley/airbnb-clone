@@ -1,3 +1,7 @@
 .hidden {
     display: none;
+    
+}
+.navigationList, .profile-dropdown {
+    list-style: none;
 }

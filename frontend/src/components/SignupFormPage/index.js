@@ -38,9 +38,9 @@ const SignupFormPage = () => {
     };
 
     return (
-        <>
+        <div className="signupContainer">
           <h1>Sign Up</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="signupForm">
             <label>
               Email
               <input
@@ -103,7 +103,7 @@ const SignupFormPage = () => {
             {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
             <button type="submit">Sign Up</button>
           </form>
-        </>
+        </div>
     )
 };
 

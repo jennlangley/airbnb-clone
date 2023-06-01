@@ -1,12 +1,9 @@
-.signupContainer {
-    font-family: sans-serif;
+.spotFormContainer {
     align-items: center;
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    margin: auto;
 }
-.signupForm {
+.spotForm {
     align-items: center;
     display: inline-flex;
     flex-direction: column;
