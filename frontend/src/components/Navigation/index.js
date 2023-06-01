@@ -12,10 +12,10 @@ const Navigation = ({ isLoaded }) => {
         );
     } else {
         sessionLinks = (
-            <div>
+            <>
                 <LoginFormModal />
                 <NavLink to='/signup'><button>Signup</button></NavLink>
-            </div>
+            </>
         );
     }
     return (

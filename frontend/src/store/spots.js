@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_ALL_SPOTS = 'spots/loadAllSpots';
 const CREATE_SPOT = 'spots/createSpot';
 const DELETE_SPOT = 'spots/deleteSpot';
-
+const LOAD_SPOT_DETAILS = 'spots/loadSpotDetails';
 
 export const loadAllSpotsAction = (spots) => {
     return {
@@ -11,14 +11,18 @@ export const loadAllSpotsAction = (spots) => {
         spots
     };
 };
-
+export const loadSpotDetailsAction = (spot) => {
+    return {
+        type: LOAD_SPOT_DETAILS,
+        spot
+    };
+};
 export const createSpotAction = (spot) => {
     return {
         type: CREATE_SPOT,
         spot
     };
 };
-
 export const deleteSpotAction = (spotId) => {
     return {
         type: DELETE_SPOT,
@@ -45,8 +49,15 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     });
     if (response.ok) {
         dispatch(deleteSpotAction(spotId))
-    }
-}
+    };
+};
+export const loadSpotDetails = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`);
+    const spot = await response.json();
+    if (response.ok) {
+        dispatch(loadSpotDetailsAction(spot));
+    };
+};
 
 const spotsReducer = (state = {}, action) => {
     let newState = { ...state }
@@ -59,6 +70,11 @@ const spotsReducer = (state = {}, action) => {
             return newState;
         case DELETE_SPOT:
             delete newState[action.spotId]
+            return newState;
+        case LOAD_SPOT_DETAILS:
+            
+            newState[action.spot.id].owner = action.spot.Owner;
+            action.spot.SpotImages.forEach(image => newState[action.spot.id].images = image )
             return newState;
         default:
             return newState;

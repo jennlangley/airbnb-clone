@@ -1,14 +1,33 @@
 import { useParams } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from 'react';
+import * as spotsActions from '../../store/spots';
 const SpotDetail = () => {
-    const { spotId } = useParams()
-    const spot = useSelector(state => state.spots[+spotId])
+    const dispatch = useDispatch();
+    const [isLoaded, setIsloaded] = useState(false);
+    const { spotId } = useParams();
+    
+    useEffect(() => {
+        dispatch(spotsActions.loadSpotDetails(+spotId)).then(() => setIsloaded(true));
+    }, [spotId, dispatch]);
+    
+    const spot = useSelector(state => state.spots[spotId]);
 
     return (
-        <>
-            <h1>{spot.name}</h1>
-            <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-        </>
+        isLoaded && (
+            <>
+                <h1>{spot.name}</h1>
+                <h3>{spot.city}, {spot.state}, {spot.country}</h3>
+                {spot.images && <img alt={spot.name} src={spot.images.url}></img>}
+                <h2>Hosted by {spot.owner.firstName} {spot.owner.lastName}</h2>
+               <p>{spot.description}</p>
+               <div>
+                    <h1>${spot.price} night</h1>
+                    
+               </div>
+            </>  
+        )
+        
     )
 }
 
