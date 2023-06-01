@@ -74,7 +74,8 @@ const spotsReducer = (state = {}, action) => {
         case LOAD_SPOT_DETAILS:
             
             newState[action.spot.id].owner = action.spot.Owner;
-            action.spot.SpotImages.forEach(image => newState[action.spot.id].images = image )
+            newState[action.spot.id].images = {};
+            action.spot.SpotImages.forEach(image => newState[action.spot.id].images[image.id] = image);
             return newState;
         default:
             return newState;
