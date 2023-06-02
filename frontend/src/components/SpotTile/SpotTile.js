@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './SpotTile.css'
 const SpotTile = ({ spot }) => {
     return (
-        <Link to={`/spots/${spot.id}`}>
+        <Link to={`/spots/${spot.id}`} className="spotLink">
             <div className="spotTile">
                 <div>
                    
@@ -19,7 +19,7 @@ const SpotTile = ({ spot }) => {
                    <p className='rating'><i className="fa-solid fa-star"></i>{spot.avgRating || "New"}</p> 
                
                  </div>
-                    <p className='price'>{spot.price} night</p>
+                    <p className='price'>${spot.price} night</p>
                
                
             </div>

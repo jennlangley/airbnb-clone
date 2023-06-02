@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 import * as sessionActions from '../../store/session';
 
 const ProfileButton = ({ user }) => {
@@ -32,19 +34,28 @@ const ProfileButton = ({ user }) => {
     };
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    const buttonClass = "buttonDropdown profile-dropdown" + (showMenu ? "" : " hidden");
     return (
         <>
-            <button onClick={openMenu}>
-                <i className="fa-regular fa-user" />
-            </button>
-            <ul className={ulClassName} ref={ulRef}>
-                <li>{user.username}</li>
-                <li>{user.firstName} {user.lastName}</li>
-                <li>{user.email}</li>
-                <li>
-                    <button onClick={logout}>Log Out</button>
-                </li>
-            </ul>
+            <div onClick={openMenu} className='profileButton'>
+                <i class="fa-solid fa-bars menuIcons"></i>
+                <i className="fa-solid fa-circle-user menuIcons" />
+            </div>
+            {user && 
+                <ul className={ulClassName} ref={ulRef}>
+                    <li>Hello, {user.username}</li>
+                    <li>{user.email}</li>
+                    <li>
+                        <span className="logoutButton" onClick={logout}>Log Out</span>
+                    </li>
+            </ul>}
+            {!user && 
+            <div className={`${buttonClass}`} onClick={openMenu} ref={ulRef}>
+                <LoginFormModal />
+                <SignupFormModal />
+            </div>
+            }
+            
         </>
     );
 };

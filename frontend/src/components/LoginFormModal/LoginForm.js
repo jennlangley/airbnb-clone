@@ -17,32 +17,38 @@ function LoginForm() {
     );
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <div className="loginContainer">
+      <h1>Log In</h1>
+      <form onSubmit={handleSubmit} className="loginForm">
+        <ul>
+          {Object.values(errors).map((error, idx) => (
+            <li className="errors" key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Username or Email
+          <input
+            type="text"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit"
+          disabled={(credential.length < 4 || password.length < 6)}
+        >
+        Log In</button>
+      </form>
+    </div>
   );
 }
 export default LoginForm;

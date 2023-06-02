@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
+import './SpotDetail.css';
 import * as spotsActions from '../../store/spots';
 const SpotDetail = () => {
     const dispatch = useDispatch();
@@ -15,17 +16,17 @@ const SpotDetail = () => {
 
     return (
         isLoaded && (
-            <>
+            <div className='spotDetailContainer'>
                 <h1>{spot.name}</h1>
                 <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-                { spot.images && Object.values(spot.images).map(image => <img alt={`${spot.name} ${image.id}`} src={image.url}></img>)}
+                {spot.images && Object.values(spot.images).map(image => <img alt={`${spot.name} ${image.id}`} src={image.url}></img>)}
                 <h2>Hosted by {spot.owner.firstName} {spot.owner.lastName}</h2>
                <p>{spot.description}</p>
-               <div>
+               <div className='spotPrice'>
                     <h1>${spot.price} night</h1>
-
+                    
                </div>
-            </>  
+            </div>  
         )
         
     )

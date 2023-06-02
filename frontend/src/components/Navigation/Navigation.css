@@ -1,7 +1,74 @@
 .hidden {
-    display: none;
-    
+    visibility: hidden;
 }
 .navigationList, .profile-dropdown {
     list-style: none;
+}
+.buttonDropdown {
+    display: grid;
+    height: fit-content;
+}
+.profile-dropdown {
+   background-color: white;
+   border: 1px solid grey;
+   margin: 0;
+   padding: 5px 10px 5px 10px;
+   position: fixed;
+   right: 15px;
+   top: 56px;
+   width: fit-content;
+   z-index: 1000;
+}
+.logoutButton {
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 4px 10px 4px 10px;
+    font-size: 14px;
+    border-radius: 25px;
+    background-color: grey;
+    color: white;
+    margin-left: 33px;
+    
+}
+.navigationList {
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+}
+.profileButton {
+    border: 1px solid grey;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+    position: absolute;
+    right: 15px;
+    top: 30px;
+    width: 50px;
+}
+.homeButton {
+    display: flex;
+    justify-content: flex-start;
+    left: 20px;
+    position: absolute;
+    top: 30px;
+}
+.navigationContainer {
+    align-items: center;
+    border-bottom: 2px solid gray;
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+}
+.menuIcons {
+    padding: 2px 3px 2px 3px;
+}
+.active {
+    color: violet;
 }

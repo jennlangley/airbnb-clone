@@ -72,7 +72,6 @@ const spotsReducer = (state = {}, action) => {
             delete newState[action.spotId]
             return newState;
         case LOAD_SPOT_DETAILS:
-            
             newState[action.spot.id].owner = action.spot.Owner;
             newState[action.spot.id].images = {};
             action.spot.SpotImages.forEach(image => newState[action.spot.id].images[image.id] = image);

@@ -1,0 +1,21 @@
+.loginContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 10px;
+}
+.loginForm {
+    align-items: center;
+    display: grid;
+    padding: auto;
+}
+.errors {
+    color: red;
+    justify-content: center;
+    list-style: none;
+}
+.loginButton {
+    background-color: lightcoral;
+}
