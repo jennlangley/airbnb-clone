@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import './Navigation.css';
@@ -7,11 +7,14 @@ const Navigation = ({ isLoaded }) => {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <>
+                <Link id='newSpot' to='/spots/new'>Create a New Spot</Link>
+                <ProfileButton user={sessionUser} />
+            </>
+            
         );
     } else {
         sessionLinks = (
-
             <ProfileButton />
         );
     }
@@ -20,7 +23,10 @@ const Navigation = ({ isLoaded }) => {
             <ul className='navigationList'>
                 <li className='navigationLinks'>
                     <div className='homeButton'>
-                        <NavLink exact to='/'><i class="fa-solid fa-house"></i></NavLink>
+                    
+                        <Link to='/'>
+                        <img id='siteLogo' alt="Site logo" src={require("../../images/wherebnb.png")} />
+                        </Link>
                     </div>
                     {isLoaded && sessionLinks}
                 </li>

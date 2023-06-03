@@ -5,7 +5,7 @@ function LoginFormModal() {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <span onClick={() => setShowModal(true)} style={{cursor: "pointer", height: "15px"}}>Log In</span>
+      <span onClick={() => setShowModal(true)} style={{cursor: "pointer"}}>Log In</span>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <LoginForm />

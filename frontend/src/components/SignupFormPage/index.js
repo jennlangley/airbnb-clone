@@ -41,15 +41,13 @@ const SignupFormPage = () => {
         <div className="signupContainer">
           <h1>Sign Up</h1>
           <form onSubmit={handleSubmit} className="signupForm">
-            <label>
-              Email
               <input
                 type="text"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-            </label>
             {errors.email && <p>{errors.email}</p>}
             <label>
               Username

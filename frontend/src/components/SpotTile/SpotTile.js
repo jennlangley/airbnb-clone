@@ -3,7 +3,7 @@ import './SpotTile.css'
 const SpotTile = ({ spot }) => {
     return (
         <Link to={`/spots/${spot.id}`} className="spotLink">
-            <div className="spotTile">
+            <div title={spot.name} className="spotTile">
                 <div>
                    
                         <img 

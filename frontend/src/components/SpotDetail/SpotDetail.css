@@ -1,9 +1,14 @@
 .spotDetailContainer {
-    max-width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: auto;
-    
+    max-width: 1000px;
+    padding: 20px;
+}
+.spotImages {
+    display: flex;
+    float: right;
+    max-width: 1000px;
     
 }

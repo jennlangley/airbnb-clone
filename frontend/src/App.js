@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import SpotForm from "./components/SpotForm/SpotForm";
 import SpotDetail from "./components/SpotDetail/SpotDetail";
+import ManageSpots from "./components/ManageSpots/ManageSpots";
 import * as sessionActions from './store/session';
 import * as spotsActions from './store/spots';
 
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path='/spots/new'>
             <SpotForm />
+          </Route>
+          <Route path='/spots/current'>
+            <ManageSpots />
           </Route>
           <Route path='/spots/:spotId'>
             <SpotDetail />

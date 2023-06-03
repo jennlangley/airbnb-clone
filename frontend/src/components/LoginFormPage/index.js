@@ -35,6 +35,7 @@ const LoginFormPage = () => {
             >
                 <label>Username or Email
                     <input
+                    placeholder="Username or Email"
                     type='text'
                     value={credential}
                     onChange={e => setCredential(e.target.value)}

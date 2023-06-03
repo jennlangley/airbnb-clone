@@ -34,6 +34,7 @@ export const loadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots');
     const spots = await response.json();
     dispatch(loadAllSpotsAction(spots.Spots));
+    return spots;
 };
 export const createSpot = (spot) => async (dispatch) => {
     const response = await csrfFetch('/api/spots', {
@@ -41,8 +42,21 @@ export const createSpot = (spot) => async (dispatch) => {
         body: JSON.stringify(spot)
     });
     const newSpot = await response.json();
-    dispatch(createSpotAction(newSpot));
+    if (response.ok) {
+        dispatch(createSpotAction(newSpot));
+        return newSpot;
+    };
 };
+export const createSpotImage = (url, preview, spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'POST',
+        body: JSON.stringify({url, preview})
+    });
+    const image = response.json();
+    if (response.ok) {
+        return image;
+    }
+}
 export const deleteSpot = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
@@ -56,6 +70,7 @@ export const loadSpotDetails = (spotId) => async (dispatch) => {
     const spot = await response.json();
     if (response.ok) {
         dispatch(loadSpotDetailsAction(spot));
+        return spot;
     };
 };
 

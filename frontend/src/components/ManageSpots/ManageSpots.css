@@ -1,0 +1,16 @@
+.manageSpotsContainer {
+    align-items: center;
+    display: block;
+    justify-content: left;
+    margin: auto;
+    max-width: 1000px;
+    position: relative;
+}
+#spotButton {
+    background-color: grey;
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+    padding: 2px;
+    border: 1px solid black;
+}

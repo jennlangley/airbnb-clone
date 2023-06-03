@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import * as sessionActions from '../../store/session';
@@ -34,23 +35,27 @@ const ProfileButton = ({ user }) => {
     };
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-    const buttonClass = "buttonDropdown profile-dropdown" + (showMenu ? "" : " hidden");
     return (
         <>
             <div onClick={openMenu} className='profileButton'>
-                <i class="fa-solid fa-bars menuIcons"></i>
+                <i className="fa-solid fa-bars menuIcons"></i>
                 <i className="fa-solid fa-circle-user menuIcons" />
             </div>
             {user && 
                 <ul className={ulClassName} ref={ulRef}>
                     <li>Hello, {user.username}</li>
-                    <li>{user.email}</li>
+                    <li style={{borderBottom: "1px solid black"}}>{user.email}</li>
+                    <li style={{borderBottom: "1px solid black"}}>
+                        <Link to="/spots/current">
+                            Manage Spots
+                        </Link>
+                    </li>
                     <li>
                         <span className="logoutButton" onClick={logout}>Log Out</span>
                     </li>
             </ul>}
             {!user && 
-            <div className={`${buttonClass}`} onClick={openMenu} ref={ulRef}>
+            <div id='buttonDropdown' className={ulClassName} onClick={openMenu} ref={ulRef}>
                 <LoginFormModal />
                 <SignupFormModal />
             </div>

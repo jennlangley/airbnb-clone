@@ -4,32 +4,37 @@
 .navigationList, .profile-dropdown {
     list-style: none;
 }
-.buttonDropdown {
+#buttonDropdown {
     display: grid;
-    height: fit-content;
+    height: 50px;
+}
+#siteLogo {
+    height: 78px;
 }
 .profile-dropdown {
    background-color: white;
    border: 1px solid grey;
+   height: 100px;
    margin: 0;
    padding: 5px 10px 5px 10px;
    position: fixed;
    right: 15px;
    top: 56px;
-   width: fit-content;
+   width: 150px;
    z-index: 1000;
 }
 .logoutButton {
     align-items: center;
-    cursor: pointer;
-    border: 1px solid black;
-    padding: 4px 10px 4px 10px;
-    font-size: 14px;
-    border-radius: 25px;
     background-color: grey;
+    border: 1px solid black;
+    border-radius: 25px;
     color: white;
+    cursor: pointer;
+    font-size: 14px;
     margin-left: 33px;
-    
+    margin-top: 5px;
+    padding: 4px 10px 4px 10px;
+    position: fixed;
 }
 .navigationList {
     display: flex;
@@ -46,7 +51,7 @@
     justify-content: center;
     padding: 2px;
     position: absolute;
-    right: 15px;
+    right: 20px;
     top: 30px;
     width: 50px;
 }
@@ -55,7 +60,7 @@
     justify-content: flex-start;
     left: 20px;
     position: absolute;
-    top: 30px;
+    top: 2px;
 }
 .navigationContainer {
     align-items: center;
@@ -71,4 +76,11 @@
 }
 .active {
     color: violet;
+}
+#newSpot {
+    position: absolute;
+    right: 100px;
+    top: 32px;
+    text-decoration: none;
+    color: limegreen;
 }
