@@ -1,28 +1,30 @@
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
 import * as spotsActions from '../../store/spots';
-import './SpotForm.css';
+import '../SpotForm/SpotForm.css';
 
-const SpotForm = () => {
+const EditSpotForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const [country, setCountry] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
-    const [description, setDescription] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
-    const [previewImage, setPreviewImage] = useState('');
-    const [imageTwo, setImageTwo] = useState('');
-    const [imageThree, setImageThree] = useState('');
-    const [imageFour, setImageFour] = useState('');
-    const [imageFive, setImageFive] = useState('');
+    const { spotId } = useParams()
+    const spot = useSelector(state => state.spots[spotId])
+    
+    const [country, setCountry] = useState(spot.country);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [lat, setLat] = useState(spot.lat);
+    const [lng, setLng] = useState(spot.lng);
+    const [description, setDescription] = useState(spot.description);
+    const [name, setName] = useState(spot.name);
+    const [price, setPrice] = useState(spot.price);
+    // const [previewImage, setPreviewImage] = useState(spot.previewImage);
+    // const [imageTwo, setImageTwo] = useState(spot.imageTwo || '');
+    // const [imageThree, setImageThree] = useState(spot.imageThree || '');
+    // const [imageFour, setImageFour] = useState(spot.imageFour || '');
+    // const [imageFive, setImageFive] = useState(spot.imageFive || '');
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     useEffect(() => {
@@ -33,13 +35,12 @@ const SpotForm = () => {
             if (!city.length) errors.city = "City is required";
             if (!state.length) errors.state = "State is required";
             if (description.length < 30) errors.description = "Description needs 30 or more characters";
-            if (!previewImage.length) errors.image =  "Preview Image is required";
+            // if (!previewImage.length) errors.image =  "Preview Image is required";
             if (!name.length) errors.name = "Name is required";
-            if (!price.length) errors.price = "Price per day is required";
+            if (!price) errors.price = "Price per day is required";
             setErrors(errors);  
         } 
-    }, [hasSubmitted, country, address, city, state, description, previewImage, name, price])
-
+    }, [hasSubmitted, country, address, city, state, description, name, price])
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
@@ -48,24 +49,19 @@ const SpotForm = () => {
                 const newSpot = {
                     address, city, state, country, lat, lng, name, description, price
                 };
-                const spot = await dispatch(spotsActions.createSpot(newSpot));
-                await dispatch(spotsActions.createSpotImage(previewImage, true, spot.id));
-                if (imageTwo) await dispatch(spotsActions.createSpotImage(imageTwo, false, spot.id));
-                if (imageThree) await dispatch(spotsActions.createSpotImage(imageThree, false, spot.id));
-                if (imageFour) await dispatch(spotsActions.createSpotImage(imageFour, false, spot.id));
-                if (imageFive) await dispatch(spotsActions.createSpotImage(imageFive, false, spot.id));
+                const spot = await dispatch(spotsActions.updateSpot(newSpot, spotId))
+                console.log(spot)
                 if (spot) reset();
                 setErrors({});
                 setHasSubmitted(false);
                 
-                history.push(`/spots/${spot.id}`);
+                history.push(`/spots/${spotId}`);
 
             } catch (error) {
                 setHasSubmitted(false)
             }
         } 
     };
-    
     const reset = () => {
         setCountry('');
         setAddress('');
@@ -76,13 +72,12 @@ const SpotForm = () => {
         setDescription('');
         setName('');
         setPrice('');
-        setPreviewImage('');
-        setImageTwo('');
-        setImageThree('');
-        setImageFour('');
-        setImageFive('');
+        // setPreviewImage('');
+        // setImageTwo('');
+        // setImageThree('');
+        // setImageFour('');
+        // setImageFive('');
     };
-
     return (
         <div className='spotFormContainer'>
             <form onSubmit={handleSubmit} className='spotForm'>
@@ -149,12 +144,12 @@ const SpotForm = () => {
                 <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
                 <input 
                     value={price}
-                    type='number'
+                    type="number"
                     onChange={e => setPrice(e.target.value)}
                     placeholder='Price per night (USD)'
                 />
                 {errors.price && (<div className='errors'>{errors.price}</div>)}
-                <h2>Liven up your spot with photos</h2>
+                {/* <h2>Liven up your spot with photos</h2>
                 <p>Submit a link to at least one photo to publish your spot.</p>
                 <input 
                     value={previewImage}
@@ -181,11 +176,10 @@ const SpotForm = () => {
                     value={imageFive}
                     onChange={e => setImageFive(e.target.value)}
                     placeholder='Image URL' 
-                />
-                <button type="submit">Create Spot</button>
+                /> */}
+                <button type="submit">Update Spot</button>
             </form>
         </div>
-    );
+    )
 }
-
-export default SpotForm;
+export default EditSpotForm;

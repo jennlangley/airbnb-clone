@@ -1,6 +1,7 @@
 .manageSpotsContainer {
     align-items: center;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: left;
     margin: auto;
     max-width: 1000px;
@@ -13,4 +14,16 @@
     color: white;
     padding: 2px;
     border: 1px solid black;
+}
+.editButtons {
+    display: flex;
+    position: relative;
+    justify-content: left;
+}
+#manageSpotsHeader {
+    display: block;
+    padding: 10px;
+}
+.manageSpotImage {
+    width: 270px;
 }

@@ -4,6 +4,7 @@ const LOAD_ALL_SPOTS = 'spots/loadAllSpots';
 const CREATE_SPOT = 'spots/createSpot';
 const DELETE_SPOT = 'spots/deleteSpot';
 const LOAD_SPOT_DETAILS = 'spots/loadSpotDetails';
+const UPDATE_SPOT = '/spots/updateSpot'
 
 export const loadAllSpotsAction = (spots) => {
     return {
@@ -29,6 +30,12 @@ export const deleteSpotAction = (spotId) => {
         spotId
     };
 };
+export const updateSpotAction = (spot) => {
+    return {
+        type: UPDATE_SPOT,
+        spot
+    };
+};
 
 export const loadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots');
@@ -47,6 +54,17 @@ export const createSpot = (spot) => async (dispatch) => {
         return newSpot;
     };
 };
+export const updateSpot = (spot, spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        body: JSON.stringify(spot)
+    });
+    const newSpot = await response.json();
+    if (response.ok) {
+        dispatch(updateSpotAction(newSpot));
+        return newSpot;
+    }
+}
 export const createSpotImage = (url, preview, spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
@@ -90,6 +108,9 @@ const spotsReducer = (state = {}, action) => {
             newState[action.spot.id].owner = action.spot.Owner;
             newState[action.spot.id].images = {};
             action.spot.SpotImages.forEach(image => newState[action.spot.id].images[image.id] = image);
+            return newState;
+        case UPDATE_SPOT:
+            newState[action.spot.id] = action.spot;
             return newState;
         default:
             return newState;

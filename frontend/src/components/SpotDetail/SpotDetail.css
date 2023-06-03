@@ -9,6 +9,7 @@
 .spotImages {
     display: flex;
     float: right;
+    flex-wrap: wrap;
     max-width: 1000px;
     
 }
