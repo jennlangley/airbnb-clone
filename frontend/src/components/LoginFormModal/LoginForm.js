@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import '../LoginFormPage/LoginForm.css';
 function LoginForm() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
@@ -16,38 +17,41 @@ function LoginForm() {
       }
     );
   };
+  const demoLogin = (e) => {
+    return dispatch(sessionActions.setSession({
+        credential: "Demo-lition",
+        password: "password"
+    }))
+}
   return (
     <div className="loginContainer">
-      <h1>Log In</h1>
       <form onSubmit={handleSubmit} className="loginForm">
-        <ul>
-          {Object.values(errors).map((error, idx) => (
-            <li className="errors" key={idx}>{error}</li>
-          ))}
+      <h1>Log In</h1>
+      {errors && 
+        <ul id="loginErrors">
+          {Object.values(errors).map((error, idx) => (<li className="errors" key={idx}>{error}</li>))}
         </ul>
-        <label>
-          Username or Email
+      }
           <input
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
+            placeholder="Username or Email"
           />
-        </label>
-        <label>
-          Password
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Password"
           />
-        </label>
         <button type="submit"
           disabled={(credential.length < 4 || password.length < 6)}
-        >
-        Log In</button>
+          >
+          Log In</button>
       </form>
+      <button onClick={demoLogin}>Demo User</button>  
     </div>
   );
 }

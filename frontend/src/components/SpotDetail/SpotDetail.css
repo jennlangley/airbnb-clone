@@ -5,6 +5,10 @@
     margin: auto;
     max-width: 1000px;
     padding: 20px;
+    border-bottom: 2px solid grey;
+}
+.detailImage {
+    width: 300px;
 }
 .spotImages {
     display: flex;
@@ -12,4 +16,39 @@
     flex-wrap: wrap;
     max-width: 1000px;
     
+}
+#spotDescription {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: fit-content;
+}
+#spotPriceInfo {
+    float: right;
+    width: 400px;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+#spotPrice {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+}
+#reserveContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#reserveButton {
+    background-color: limegreen;
+    color: white;
+    width: 400px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 2px solid black;
+    box-shadow: 5px 5px black;
 }
