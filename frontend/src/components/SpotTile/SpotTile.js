@@ -19,7 +19,7 @@ const SpotTile = ({ spot }) => {
                    <p className='rating'><i className="fa-solid fa-star"></i>{spot.avgRating || "New"}</p> 
                
                  </div>
-                    <p className='price'>${spot.price} night</p>
+                    <p className='price'>${(Math.round(spot.price*100)/100).toFixed(2)} night</p>
                
                
             </div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import DeleteModal from '../DeleteSpotModal';
+import DeleteModal from '../DeleteSpotModal/DeleteFormModal';
 const ManageSpotTile = ({ spot }) => {
 
     return (
@@ -24,11 +24,15 @@ const ManageSpotTile = ({ spot }) => {
                     </div>
                     </Link>
                     <div className='editButtons'>
-                        <a href={`/spots/${spot.id}/edit`}>
+                        <div>
+                           <a href={`/spots/${spot.id}/edit`}>
                             <button style={{cursor: "pointer"}}>Update</button>
-                        </a>
+                        </a> 
+                        </div>
+                        <div>
+                           <DeleteModal spotId={spot.id} /> 
+                        </div>
                         
-                        <button><DeleteModal spotId={spot.id} /></button>
                     </div>
             </div>
         

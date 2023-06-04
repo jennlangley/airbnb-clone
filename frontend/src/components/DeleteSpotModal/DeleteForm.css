@@ -1,0 +1,7 @@
+#deleteForm {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  padding: none;
+}

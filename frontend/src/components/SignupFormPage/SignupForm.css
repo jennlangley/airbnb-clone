@@ -1,14 +1,24 @@
 .signupContainer {
-    align-items: center;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     margin: auto;
+    padding: 10px;
+    width: 400px;
 }
 .signupForm {
-    align-items: center;
-    display: grid;
-    
-    padding: auto;
-    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+#signupButton {
+    margin: 5px 0px;
+    padding: 5px;
+}
+#signupErrors {
+    margin: 0;
+    padding: 0;
+}
+#signUp {
+    text-align: center;
 }

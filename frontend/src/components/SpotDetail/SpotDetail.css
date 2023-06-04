@@ -1,21 +1,17 @@
 .spotDetailContainer {
+    border-bottom: 2px solid grey;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: auto;
     max-width: 1000px;
     padding: 20px;
-    border-bottom: 2px solid grey;
-}
-.detailImage {
-    width: 300px;
 }
 .spotImages {
     display: flex;
-    float: right;
     flex-wrap: wrap;
+    float: right;
     max-width: 1000px;
-    
 }
 #spotDescription {
     display: flex;
@@ -24,31 +20,52 @@
     width: fit-content;
 }
 #spotPriceInfo {
-    float: right;
-    width: 400px;
     border: 3px solid black;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    float: right;
     padding: 20px;
+    width: 400px;
 }
 #spotPrice {
-    display: flex;
-    position: relative;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
 }
 #reserveContainer {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
     position: relative;
 }
 #reserveButton {
     background-color: limegreen;
-    color: white;
-    width: 400px;
-    height: 50px;
-    cursor: pointer;
-    font-size: 16px;
     border: 2px solid black;
     box-shadow: 5px 5px black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    height: 50px;
+    width: 400px;
+}
+#detailImage1 {
+    flex: 2;
+}
+#detailImage2 {
+    flex: 2;
+}
+#detailImage3 {
+    flex: 2;
+}
+#detailImage4 {
+    flex: 1;
+}
+#detailImage5 {
+    flex: 1;
+}
+.detailImage {
+    display: flex;
+    width: 300px;
 }
