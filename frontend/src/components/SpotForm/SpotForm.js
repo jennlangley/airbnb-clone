@@ -55,13 +55,13 @@ const SpotForm = () => {
                 if (imageFour) await dispatch(spotsActions.createSpotImage(imageFour, false, spot.id));
                 if (imageFive) await dispatch(spotsActions.createSpotImage(imageFive, false, spot.id));
                 if (spot) reset();
-                setErrors({});
-                setHasSubmitted(false);
                 
+                setHasSubmitted(false);
+                setErrors({});
                 history.push(`/spots/${spot.id}`);
 
             } catch (error) {
-                setHasSubmitted(false)
+                return
             }
         } 
     };

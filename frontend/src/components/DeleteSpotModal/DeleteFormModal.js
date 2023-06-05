@@ -11,6 +11,7 @@ function DeleteModal({ spotId }) {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
             <DeleteForm spotId={spotId} />
+            <button onClick={e => setShowModal(false)}>No (Keep Spot)</button>
         </Modal>
       )}
     </div>

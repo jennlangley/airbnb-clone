@@ -50,7 +50,7 @@ const EditSpotForm = () => {
                     address, city, state, country, lat, lng, name, description, price
                 };
                 const spot = await dispatch(spotsActions.updateSpot(newSpot, spotId))
-                console.log(spot)
+                
                 if (spot) reset();
                 setErrors({});
                 setHasSubmitted(false);
@@ -58,7 +58,7 @@ const EditSpotForm = () => {
                 history.push(`/spots/${spotId}`);
 
             } catch (error) {
-                setHasSubmitted(false)
+                return
             }
         } 
     };

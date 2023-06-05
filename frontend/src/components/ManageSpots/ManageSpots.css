@@ -19,6 +19,8 @@
     display: flex;
     position: relative;
     justify-content: left;
+    align-items: center;
+    height: fit-content;
 }
 #manageSpotsHeader {
     display: block;

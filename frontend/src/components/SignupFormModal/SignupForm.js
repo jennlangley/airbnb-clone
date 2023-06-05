@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
@@ -13,9 +13,8 @@ const SignupFormPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState({});
-
-    if (sessionUser) return <Redirect to='/' />;
-
+    const [disabled, setDisabled] = useState(true);
+  
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
@@ -35,7 +34,16 @@ const SignupFormPage = () => {
             confirmPassword: "Confirm Password field must be the same as the Password field"
         });
     };
-
+    useEffect(() => {
+      let disabled = true;
+      if ((firstName && lastName && email)) {
+        disabled = false;
+      };
+      if (username.length < 4) disabled = true;
+      if (password.length < 6 || confirmPassword !== password) disabled = true;
+      setDisabled(disabled);
+    }, [username, firstName, lastName, email, password, confirmPassword])
+    if (sessionUser) return <Redirect to='/' />;
     return (
         <div className="signupContainer">
           <h1 id="signUp">Sign Up</h1>
@@ -82,7 +90,7 @@ const SignupFormPage = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password"
               />
-            <button id="signupButton" type="submit">Sign Up</button>
+            <button disabled={disabled} id="signupButton" type="submit">Sign Up</button>
           </form>
         </div>
     )
