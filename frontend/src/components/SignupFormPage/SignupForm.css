@@ -4,7 +4,6 @@
     justify-content: center;
     margin: auto;
     padding: 10px;
-    width: 400px;
 }
 .signupForm {
     display: flex;
@@ -12,8 +11,22 @@
     padding: 10px;
 }
 #signupButton {
-    margin: 5px 0px;
-    padding: 5px;
+    background-color: limegreen;
+    border: 2px solid black;
+    box-shadow: 5px 5px black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    height: 50px;
+    width: 395px;
+}
+#signupButton:disabled {
+    background-color: white;
+    color: grey;
+    border: 2px solid grey;
+    box-shadow: 5px 5px grey;
+    cursor: auto;
+    width: 395px;
 }
 #signupErrors {
     margin: 0;

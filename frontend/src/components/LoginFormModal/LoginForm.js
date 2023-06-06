@@ -25,8 +25,8 @@ function LoginForm() {
 }
   return (
     <div className="loginContainer">
+    <h1>Log In</h1>
       <form onSubmit={handleSubmit} className="loginForm">
-      <h1>Log In</h1>
       {errors && 
         <ul id="loginErrors">
           {Object.values(errors).map((error, idx) => (<li className="errors" key={idx}>{error}</li>))}
@@ -46,10 +46,13 @@ function LoginForm() {
             required
             placeholder="Password"
           />
-        <button type="submit"
-          disabled={(credential.length < 4 || password.length < 6)}
-          >
-          Log In</button>
+          <button 
+            id="loginButton"
+            type="submit"
+            disabled={(credential.length < 4 || password.length < 6)}
+            >
+            Log In
+            </button>
       </form>
       <button id="demoUser" onClick={demoLogin}>Demo User</button>  
     </div>

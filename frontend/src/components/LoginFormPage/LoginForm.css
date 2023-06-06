@@ -8,19 +8,50 @@
     width: 400px;
 }
 .loginForm {
-    align-items: center;
+    
     display: flex;
     flex-direction: column;
-    padding: auto;
+    width: inherit;
 }
 .errors {
     color: red;
     justify-content: center;
     list-style: none;
 }
-.loginButton {
-    background-color: lightcoral;
+#loginButton {
+    background-color: limegreen;
+    border: 2px solid black;
+    box-shadow: 5px 5px black;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    height: 50px;
+    width: 395px;
+}
+#loginButton:disabled {
+    background-color: white;
+    color: grey;
+    border: 2px solid grey;
+    box-shadow: 5px 5px grey;
+    cursor: auto;
+    width: 395px;
 }
 #loginErrors {
-    margin: 0;
+    padding: 0;
+}
+#loginTitle {
+    display: flex;
+    align-items: center;
+}
+#demoUser {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 10px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    text-decoration: underline;
+    color: limegreen;
+    
 }

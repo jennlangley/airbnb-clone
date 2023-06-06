@@ -7,3 +7,7 @@ html, body
 h1, h2, p {
     margin: 2px;
 }
+input {
+    margin: 5px 0px;
+    padding: 2px;
+}
