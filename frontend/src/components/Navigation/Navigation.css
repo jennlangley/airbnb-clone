@@ -74,9 +74,6 @@
 .menuIcons {
     padding: 2px 3px 2px 3px;
 }
-.active {
-    color: violet;
-}
 #newSpot {
     position: absolute;
     right: 100px;

@@ -26,11 +26,11 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 1;
     float: right;
-    padding: 20px;
-    width: fit-content;
     height: fit-content;
-
+    padding: 20px;
+    width: 300px;
 }
 #spotPrice {
     align-items: center;
@@ -52,17 +52,17 @@
     cursor: pointer;
     font-size: 16px;
     height: 50px;
-    width: 400px;
+    width: -webkit-fill-available;
 }
 #reviewContainer {
     border-top: 2px solid grey;
     padding-top: 5px;
 }
 .spotImages {
+    align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: flex-start;
     max-width: 1000px;
 }
 #detailImage1 {
@@ -80,13 +80,25 @@
 #detailImage5 {
     width: 300px;
 }
+#postReviewButton {
+    background-color: grey;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+#priceOnly {
+    display: flex;
+    font-size: 24px;
+}
 /* .detailImage {
     display: flex;
     width: 300px;
 } */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     #spotDescription {
-        flex-direction: column;
         align-items: center;
+        flex-direction: column;
     }
 }

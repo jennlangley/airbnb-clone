@@ -1,8 +1,8 @@
 import { csrfFetch } from "./csrf";
 
-const LOAD_REVIEWS = 'reviews/loadReviews';
+const LOAD_REVIEWS = 'reviews/loadSpotReviews';
 
-export const loadReviewsAction = (reviews) => {
+export const loadSpotReviewsAction = (reviews) => {
     return {
         type: LOAD_REVIEWS,
         reviews
@@ -10,10 +10,10 @@ export const loadReviewsAction = (reviews) => {
 };
 
 
-export const loadReviews = (spotId) => async (dispatch) => {
+export const loadSpotReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
     const reviews = await response.json();
-    dispatch(loadReviewsAction(reviews.Reviews));
+    dispatch(loadSpotReviewsAction(reviews.Reviews));
     return reviews;
 };
 export const loadUserReviews = () => async (dispatch) => {

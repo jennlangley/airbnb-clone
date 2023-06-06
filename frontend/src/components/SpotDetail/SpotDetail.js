@@ -5,6 +5,7 @@ import './SpotDetail.css';
 import * as spotsActions from '../../store/spots';
 import * as reviewsActions from '../../store/reviews';
 import Reviews from '../Reviews/Reviews';
+import CreateReviewModal from '../CreateReviewModal/CreateReviewModal';
 const SpotDetail = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsloaded] = useState(false);
@@ -12,7 +13,7 @@ const SpotDetail = () => {
     let imageNumber = 1;
     useEffect(() => {
         dispatch(spotsActions.loadSpotDetails(+spotId)).then(
-        dispatch(reviewsActions.loadReviews(+spotId)))
+        dispatch(reviewsActions.loadSpotReviews(+spotId)))
         .then(() => setIsloaded(true));
     }, [spotId, dispatch]);
     
@@ -39,8 +40,8 @@ const SpotDetail = () => {
                     
                     <div id='spotPriceInfo'>
                         <div id='spotPrice'>
-                        <h1>${(Math.round(spot.price*100)/100).toFixed(2)} night</h1>
-                        <p><i className="fa-solid fa-star"></i>{spot.avgRating || " New"} <span>• {spot.numReviews || 0 } reviews</span></p>
+                        <h1 id='priceOnly'>${(Math.round(spot.price*100)/100).toFixed(2)} night</h1>
+                        <p><i className="fa-solid fa-star"></i> {spot.avgRating || " New"} <span> { spot.numReviews? ("• " + spot.numReviews + " reviews") : ""}</span></p>
                         </div>
                         <div id='reserveContainer'>
                             <button id='reserveButton' onClick={reserveAlert}>Reserve</button>
@@ -50,8 +51,10 @@ const SpotDetail = () => {
                 
                 <div id='reviewContainer'>
                     <div id='reviewOverview'>
-                        <p><i className="fa-solid fa-star"></i>{spot.avgRating || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + " reviews") : ""}</span></p>
+                        <p><i className="fa-solid fa-star"></i> {spot.avgRating || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + " reviews") : ""}</span></p>
                     </div>
+                    <CreateReviewModal spotId={spotId} />
+                    <p>Be the first to post your review!</p>
                     <div id='allReviews'>
                         {reviews && Object.values(reviews).map(review => <Reviews key={review.id} review={review} />)} 
                     </div>
