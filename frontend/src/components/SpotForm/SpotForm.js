@@ -129,14 +129,17 @@ const SpotForm = () => {
                     onChange={e => setLng(e.target.value)}
                     placeholder='Longitude'
                 />
-                <h2>Describe your place to guests</h2>
-                <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                <textarea 
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                    placeholder='Please write at least 30 characters'
-                />
-                {errors.description && (<div className='errors'>{errors.description}</div>)}
+                <div id='description'>
+                    <h2>Describe your place to guests</h2>
+                    <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+                    <textarea 
+                        id='spotFormDescription'
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                        placeholder='Please write at least 30 characters'
+                    />
+                    {errors.description && (<div className='errors'>{errors.description}</div>)}
+                </div>
                 <h2>Create a title for your spot</h2>
                 <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
                 <input 
@@ -147,13 +150,18 @@ const SpotForm = () => {
                 {errors.name && (<div className='errors'>{errors.name}</div>)}
                 <h2>Set a base price for your spot</h2>
                 <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
-                <input 
-                    value={price}
-                    type='number'
-                    onChange={e => setPrice(e.target.value)}
-                    placeholder='Price per night (USD)'
-                />
-                {errors.price && (<div className='errors'>{errors.price}</div>)}
+                <div>
+                    <span>$ </span>
+                    <input 
+                        id='inputSpotPrice'
+                        value={price}
+                        type='number'
+                        onChange={e => setPrice(e.target.value)}
+                        placeholder='Price per night (USD)'
+                    />
+                    {errors.price && (<div className='errors'>{errors.price}</div>)} 
+                </div>
+                
                 <h2>Liven up your spot with photos</h2>
                 <p>Submit a link to at least one photo to publish your spot.</p>
                 <input 
@@ -182,7 +190,7 @@ const SpotForm = () => {
                     onChange={e => setImageFive(e.target.value)}
                     placeholder='Image URL' 
                 />
-                <button type="submit">Create Spot</button>
+                <button id='createSpotButton' type="submit">Create Spot</button>
             </form>
         </div>
     );

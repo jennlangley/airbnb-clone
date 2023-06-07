@@ -26,7 +26,7 @@ const ManageSpotTile = ({ spot }) => {
                     <div className='editButtons'>
                         <div>
                            <a href={`/spots/${spot.id}/edit`}>
-                            <button style={{cursor: "pointer"}}>Update</button>
+                            <button id='manageSpotButton'>Update</button>
                         </a> 
                         </div>
                         <div>

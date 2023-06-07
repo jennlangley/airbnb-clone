@@ -9,3 +9,23 @@
     width: 500px;
    
 }
+#createSpotButton {
+    background-color: grey;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+    width: fit-content;
+}
+#inputSpotPrice {
+    width: 478px;
+}
+#spotFormDescription {
+    height: 100px;
+    width: 478px;
+    margin-bottom: 10px;
+}
+#description {
+    border-bottom: 2px solid grey;
+}

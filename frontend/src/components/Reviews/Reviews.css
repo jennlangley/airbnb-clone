@@ -1,3 +1,11 @@
 #singleReview {
     padding: 10px 0px;
 }
+#deleteReviewButton {
+    background-color: grey;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}

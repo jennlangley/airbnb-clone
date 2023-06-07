@@ -7,7 +7,7 @@ function DeleteModal({ spotId }) {
 
   return (
     <div id='deleteForm'>
-      <button onClick={() => setShowModal(true)} style={{cursor: "pointer"}}>Delete</button>
+      <button id='manageSpotButton' onClick={() => setShowModal(true)}>Delete</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
             <DeleteForm spotId={spotId} />
