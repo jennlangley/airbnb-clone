@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as reviewsActions from '../../store/reviews';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import './CreateReview.css';
 
@@ -10,15 +10,26 @@ const CreateReview = () => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0);
     const [hover, setHover] = useState(0);
-    
+    const [errors, setErrors] = useState({});
+    const user = useSelector(state => state.session.user);
 
-    const handleSubmit = async () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setErrors({})
+
         const newReview = {review, stars};
-        await dispatch(reviewsActions.createReview(newReview, spotId))
+        return dispatch(reviewsActions.createReview(newReview, spotId, user)).catch(
+            async(res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            }
+        )
+       
     }
     return (
         <div id='createReviewContainer'>
             <h1>How was your stay?</h1>
+            {errors && <p>{errors.message}</p>}
             <textarea
             id='reviewText'
             placeholder='Leave your review here...'
@@ -46,7 +57,7 @@ const CreateReview = () => {
                 })}
             Stars
             </div>
-            <button type='submit' onClick={e => handleSubmit(e)} id='submitReviewButton'>Submit Your Review</button>
+            <button disabled={(review.length < 10) || !stars} type='submit' onClick={e => handleSubmit(e)} id='submitReviewButton'>Submit Your Review</button>
         </div>
     )
 }

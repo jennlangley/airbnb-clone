@@ -20,8 +20,8 @@ const SpotDetail = () => {
     const spot = useSelector(state => state.spots[spotId]);
     const reviews = useSelector(state => state.reviews);
     const user = useSelector(state => state.session.user);
-   
-    const userReview = Object.values(reviews).filter(review => review.userId === user.id)
+    let userReview;
+    user ? userReview = Object.values(reviews).filter(review => review.userId === user.id) : userReview = null;
     
     const reserveAlert = (e) => {
         alert("Feature coming soon!");
@@ -45,7 +45,7 @@ const SpotDetail = () => {
                     <div id='spotPriceInfo'>
                         <div id='spotPrice'>
                         <h1 id='priceOnly'>${(Math.round(spot.price*100)/100).toFixed(2)} night</h1>
-                        <p><i className="fa-solid fa-star"></i> {spot.numReviews?  spot.avgRating : " New"} <span> { spot.numReviews? ("• " + spot.numReviews + " reviews") : ""}</span></p>
+                        <p><i className="fa-solid fa-star"></i> {spot.numReviews?  spot.avgRating : " New"} <span> { spot.numReviews? ("• " + spot.numReviews + (spot.numReviews === 1 ? " review" : " reviews")) : ""}</span></p>
                         </div>
                         <div id='reserveContainer'>
                             <button id='reserveButton' onClick={reserveAlert}>Reserve</button>
@@ -55,19 +55,19 @@ const SpotDetail = () => {
                 
                 <div id='reviewContainer'>
                     <div id='reviewOverview'>
-                        <p><i className="fa-solid fa-star"></i> {spot.numReviews || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + " reviews") : ""}</span></p>
+                        <p><i className="fa-solid fa-star"></i> {spot.numReviews || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + (spot.numReviews === 1 ? " review" : " reviews")) : ""}</span></p>
                     </div>
                     
-                    {(spot.ownerId !== user.id) && !(userReview.length > 0) && <CreateReviewModal spotId={+spotId} />}
+                    {user && ((spot.ownerId !== user.id) && !(userReview.length > 0) && <CreateReviewModal spotId={+spotId} />)}
                     {spot.numReviews < 1 && <p>Be the first to post your review!</p>}
                     <div id='allReviews'>
-                        {reviews && Object.values(reviews).map(review => <Reviews spotId={+spotId} key={review.id} review={review} />)} 
+                        {reviews && Object.values(reviews).reverse().map(review => <Reviews spotId={+spotId} key={review.id} review={review} />)} 
                     </div>
                 </div>
             </div>  
         )
         
-    )
-}
+    );
+};
 
 export default SpotDetail;

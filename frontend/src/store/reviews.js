@@ -23,7 +23,6 @@ export const createReviewAction = (review) => {
     };
 };
 
-
 export const loadSpotReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
     const reviews = await response.json();
@@ -43,14 +42,15 @@ export const deleteReview = (reviewId) => async (dispatch) => {
     dispatch(deleteReviewAction(reviewId));
 };
 export const createReview = (review, spotId) => async (dispatch) => {
-    console.log(spotId)
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         body: JSON.stringify(review)
     })
-    const newReview = await response.json();
-    dispatch(createReview(newReview));
-    return newReview; 
+    if (response.ok) {
+        const review = await response.json();
+        dispatch(createReviewAction(review))
+        return review;
+    }
 };
 
 const reviewsReducer = (state = {}, action) => {

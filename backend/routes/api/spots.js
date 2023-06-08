@@ -340,8 +340,9 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             },
             {
                 model: ReviewImage
-            }]
-        }]
+            }],
+        }],
+        order: [[Review, 'createdAt', 'DESC']],
     });
     if (!spot) {
         const err = new Error('Spot couldn\'t be found');

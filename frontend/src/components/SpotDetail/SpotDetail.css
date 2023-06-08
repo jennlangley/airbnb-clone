@@ -20,6 +20,7 @@
 #hostedByAndDescription {
     display: flex;
     flex-direction: column;
+    width: 600px;
 }
 #spotPriceInfo {
     border: 3px solid black;
