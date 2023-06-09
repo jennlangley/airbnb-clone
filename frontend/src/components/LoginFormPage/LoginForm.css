@@ -19,7 +19,7 @@
     list-style: none;
 }
 #loginButton {
-    background-color: limegreen;
+    background-color: #A458A2;
     border: 2px solid black;
     box-shadow: 5px 5px black;
     color: white;
@@ -52,6 +52,6 @@
 	cursor: pointer;
 	outline: inherit;
     text-decoration: underline;
-    color: limegreen;
+    color: #A458A2;
     
 }

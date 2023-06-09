@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 0px;
 }
 #descriptionPrice {
     display: flex;
@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     width: 600px;
+    max-width: 100%;
 }
 #spotPriceInfo {
     border: 3px solid black;
@@ -46,7 +47,7 @@
     position: relative;
 }
 #reserveButton {
-    background-color: limegreen;
+    background-color: #A458A2;
     border: 2px solid black;
     box-shadow: 5px 5px black;
     color: white;
@@ -60,26 +61,42 @@
     padding-top: 5px;
 }
 .spotImages {
-    align-items: flex-start;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-areas: "image1 image2 image3"
+                         "image1 image4 image5";
     max-width: 1000px;
 }
 #detailImage1 {
-    width: 400px;
+    width: 500px;
+    max-width:100%;
+    grid-area: image1;
+    height: 303px;
 }
 #detailImage2 {
-    width: 300px;
+    width: 250px;
+    height: 150px;
+    max-width:100%;
+    grid-area: image2;
+    padding: 0px 3px 3px;
 }
 #detailImage3 {
-    width: 300px;
+    width: 250px;
+    height: 150px;
+    max-width: 100%;
+    grid-area: image3;
 }
 #detailImage4 {
-    width: 300px;
+    width: 250px;
+    height: 150px;
+    max-width:1 00%;
+    grid-area: image4;
+    padding: 0px 3px 3px;
 }
 #detailImage5 {
-    width: 300px;
+    width: 250px;
+    height: 150px;
+    max-width: 100%;
+    grid-area: image5;
 }
 #postReviewButton {
     background-color: grey;
@@ -93,13 +110,19 @@
     display: flex;
     font-size: 24px;
 }
-/* .detailImage {
-    display: flex;
-    width: 300px;
-} */
 @media (max-width: 700px) {
     #spotDescription {
         align-items: center;
         flex-direction: column;
+    }
+    .spotImages {
+        display: flex;
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+    #detailImage1, #detailImage2, #detailImage3, #detailImage4, #detailImage5 {
+        padding: 2px;
+        height: 300px;
+        width: 500px;
     }
 }

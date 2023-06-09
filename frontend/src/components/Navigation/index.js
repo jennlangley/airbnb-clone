@@ -25,7 +25,7 @@ const Navigation = ({ isLoaded }) => {
                     <div className='homeButton'>
                     
                         <Link to='/'>
-                        <img id='siteLogo' alt="Site logo" src={require("../../images/wherebnb.png")} />
+                        <img id='siteLogo' alt="Site logo" src={require("../../images/weirdbnb.png")} />
                         </Link>
                     </div>
                     {isLoaded && sessionLinks}

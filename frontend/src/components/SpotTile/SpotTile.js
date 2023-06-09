@@ -9,7 +9,7 @@ const SpotTile = ({ spot }) => {
                         <img 
                             className="spotImage" 
                             alt={spot.name} 
-                            src="https://a0.muscache.com/im/pictures/0a73520d-5132-4423-8625-a1c17364dee2.jpg?im_w=720" 
+                            src={spot.previewImage} 
                             /> 
                     
                 </div>

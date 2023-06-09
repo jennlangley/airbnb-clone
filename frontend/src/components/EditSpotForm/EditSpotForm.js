@@ -177,7 +177,7 @@ const EditSpotForm = () => {
                     onChange={e => setImageFive(e.target.value)}
                     placeholder='Image URL' 
                 /> */}
-                <button type="submit">Update Spot</button>
+                <button id='createSpotButton' type="submit">Update Spot</button>
             </form>
         </div>
     )

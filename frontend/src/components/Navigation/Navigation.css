@@ -9,7 +9,8 @@
     height: 50px;
 }
 #siteLogo {
-    height: 78px;
+    height: 88px;
+    top: -3px;
 }
 .profile-dropdown {
    background-color: white;
@@ -64,7 +65,8 @@
 }
 .navigationContainer {
     align-items: center;
-    border-bottom: 2px solid gray;
+    background-color: white;
+    border-bottom: 1.5px solid gray;
     display: flex;
     height: 80px;
     justify-content: center;
@@ -75,9 +77,9 @@
     padding: 2px 3px 2px 3px;
 }
 #newSpot {
+    color: #A458A2;
     position: absolute;
     right: 100px;
-    top: 32px;
     text-decoration: none;
-    color: limegreen;
+    top: 32px;
 }

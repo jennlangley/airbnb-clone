@@ -9,3 +9,10 @@
     cursor: pointer;
     font-family: inherit;
 }
+#reviewerName {
+    font-size: 18px;
+}
+#reviewDate {
+    color: grey;
+    font-size: 14px;
+}

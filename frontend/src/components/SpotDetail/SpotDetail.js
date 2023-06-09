@@ -32,7 +32,7 @@ const SpotDetail = () => {
                 <h1>{spot.name}</h1>
                 <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                 <div className='spotImages'>
-                    {spot.images && Object.values(spot.images).map(image => <img id={`detailImage${imageNumber++}`} className="detailImage" key={image.id} alt={`${spot.name} ${image.id}`} src="https://a0.muscache.com/im/pictures/0a73520d-5132-4423-8625-a1c17364dee2.jpg?im_w=720"></img>)}
+                    {spot.images && Object.values(spot.images).map(image => <img id={`detailImage${imageNumber++}`} className="detailImage" key={image.id} alt={`${spot.name} ${image.id}`} src={image.url}></img>)}
                 </div>
                 <div id='spotDescription'>
                     <div id='hostedByAndDescription'>

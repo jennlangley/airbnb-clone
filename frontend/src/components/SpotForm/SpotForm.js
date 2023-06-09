@@ -89,34 +89,40 @@ const SpotForm = () => {
                 <h1>Create a new Spot</h1>
                 <h2>Where's your place located?</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
-                <label>Country</label>
+                <label>Country
+                {errors.country && (<span className='errors'> {errors.country}</span>)}
+                </label>
                 <input 
                     value={country}
                     onChange={e => setCountry(e.target.value)}
                     placeholder='Country'
                 />
-                {errors.country && (<div className='errors'>{errors.country}</div>)}
-                <label>Street Address</label>
+                <label>Street Address
+                {errors.address && (<span className='errors'> {errors.address}</span>)}
+                </label>
                 <input 
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                     placeholder='Address'
                 />
-                {errors.address && (<div className='errors'>{errors.address}</div>)}
-                <label>City</label>
+                <label>City
+                {errors.city && (<span className='errors'> {errors.city}</span>)}
+                </label>
                 <input 
                     value={city}
                     onChange={e => setCity(e.target.value)}
                     placeholder='City'
                 />
-                {errors.city && (<div className='errors'>{errors.city}</div>)}
-                <label>State</label>
+                <span>,</span>
+                <label>State
+                {errors.state && (<span className='errors'> {errors.state}</span>)}
+                </label>
                 <input 
                     value={state}
                     onChange={e => setState(e.target.value)}
                     placeholder='STATE'
                 />
-                {errors.state && (<div className='errors'>{errors.state}</div>)}
+                
                 <label>Latitude</label>
                 <input
                     value={lat}
@@ -138,7 +144,7 @@ const SpotForm = () => {
                         onChange={e => setDescription(e.target.value)}
                         placeholder='Please write at least 30 characters'
                     />
-                    {errors.description && (<div className='errors'>{errors.description}</div>)}
+                    {errors.description && (<span className='errors'>{errors.description}</span>)}
                 </div>
                 <h2>Create a title for your spot</h2>
                 <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
@@ -147,7 +153,7 @@ const SpotForm = () => {
                     onChange={e => setName(e.target.value)}
                     placeholder='Name of your spot'
                 />
-                {errors.name && (<div className='errors'>{errors.name}</div>)}
+                {errors.name && (<span className='errors'>{errors.name}</span>)}
                 <h2>Set a base price for your spot</h2>
                 <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
                 <div>
@@ -159,7 +165,7 @@ const SpotForm = () => {
                         onChange={e => setPrice(e.target.value)}
                         placeholder='Price per night (USD)'
                     />
-                    {errors.price && (<div className='errors'>{errors.price}</div>)} 
+                    {errors.price && (<span className='errors'>{errors.price}</span>)} 
                 </div>
                 
                 <h2>Liven up your spot with photos</h2>
@@ -169,7 +175,7 @@ const SpotForm = () => {
                     onChange={e => setPreviewImage(e.target.value)}
                     placeholder='Preview Image URL'
                 />
-                {errors.image && (<div className='errors'>{errors.image}</div>)}
+                {errors.image && (<span className='errors'>{errors.image}</span>)}
                 <input 
                     value={imageTwo}
                     onChange={e => setImageTwo(e.target.value)}

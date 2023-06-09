@@ -11,8 +11,8 @@ const Reviews = ({ review, spotId }) => {
 
     return (
         <div id="singleReview">
-            <p>{review.User?.firstName || user.firstName}</p>
-            <p>{monthNames[dateCreated.getMonth()]} {dateCreated.getFullYear()}</p>
+            <p id='reviewerName'>{review.User?.firstName || user.firstName}</p>
+            <p id='reviewDate'>{monthNames[dateCreated.getMonth()]} {dateCreated.getFullYear()}</p>
             <p>{review.review}</p>
             {showDelete && <DeleteReviewModal reviewId={review.id} spotId={spotId} />}
         </div>

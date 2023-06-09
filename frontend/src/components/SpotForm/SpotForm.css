@@ -2,6 +2,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .spotForm {
     display: inline-flex;
@@ -17,6 +18,10 @@
     cursor: pointer;
     font-family: inherit;
     width: fit-content;
+    position: relative; 
+    margin-left: -50px;
+    left: 50%;
+    bottom: 0px;
 }
 #inputSpotPrice {
     width: 478px;

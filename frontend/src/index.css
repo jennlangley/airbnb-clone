@@ -11,3 +11,6 @@ input {
     margin: 5px 0px;
     padding: 2px;
 }
+img {
+    max-width: 100%;
+}
