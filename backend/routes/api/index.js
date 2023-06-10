@@ -24,7 +24,7 @@ const { requireAuth } = require('../../utils/auth.js');
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
     where: {
-      username: 'Demo-lition'
+      username: 'jhenderson1'
     }
   });
   setTokenCookie(res, user);
