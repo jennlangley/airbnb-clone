@@ -108,7 +108,7 @@
 }
 #priceOnly {
     display: flex;
-    font-size: 24px;
+    font-size: 22px;
 }
 @media (max-width: 700px) {
     #spotDescription {

@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-
+import * as spotsActions from './spots';
 const LOAD_REVIEWS = 'reviews/loadSpotReviews';
 const DELETE_REVIEW = 'reviews/deleteReview';
 const CREATE_REVIEW = 'reviews/createReview';
@@ -40,17 +40,19 @@ export const deleteReview = (reviewId) => async (dispatch) => {
     });
     const data = response.json();
     dispatch(deleteReviewAction(reviewId));
+    return data;
 };
 export const createReview = (review, spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         body: JSON.stringify(review)
-    })
+    });
     if (response.ok) {
         const review = await response.json();
-        dispatch(createReviewAction(review))
+        dispatch(createReviewAction(review));
+        dispatch(spotsActions.loadSpotDetails(spotId));
         return review;
-    }
+    };
 };
 
 const reviewsReducer = (state = {}, action) => {

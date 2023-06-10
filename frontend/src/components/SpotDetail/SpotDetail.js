@@ -12,13 +12,14 @@ const SpotDetail = () => {
     const { spotId } = useParams();
     let imageNumber = 1;
     useEffect(() => {
-        dispatch(spotsActions.loadSpotDetails(+spotId)).then(
-        dispatch(reviewsActions.loadSpotReviews(+spotId)))
-        .then(() => setIsloaded(true));
+        dispatch(reviewsActions.loadSpotReviews(+spotId))
+        dispatch(spotsActions.loadSpotDetails(+spotId)).then(() => setIsloaded(true));
     }, [spotId, dispatch]);
     
     const spot = useSelector(state => state.spots[spotId]);
     const reviews = useSelector(state => state.reviews);
+    console.log(Object.keys(reviews).length)
+    console.log(spot)
     const user = useSelector(state => state.session.user);
     let userReview;
     user ? userReview = Object.values(reviews).filter(review => review.userId === user.id) : userReview = null;
@@ -55,7 +56,7 @@ const SpotDetail = () => {
                 
                 <div id='reviewContainer'>
                     <div id='reviewOverview'>
-                        <p><i className="fa-solid fa-star"></i> {spot.numReviews || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + (spot.numReviews === 1 ? " review" : " reviews")) : ""}</span></p>
+                        <p><i className="fa-solid fa-star"></i> {spot.avgRating || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + (spot.numReviews === 1 ? " review" : " reviews")) : ""}</span></p>
                     </div>
                     
                     {user && ((spot.ownerId !== user.id) && !(userReview.length > 0) && <CreateReviewModal spotId={+spotId} />)}
