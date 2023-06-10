@@ -10,9 +10,9 @@
 }
 #submitReviewButton:disabled {
     background-color: white;
-    color: grey;
     border: 2px solid grey;
     box-shadow: 5px 5px grey;
+    color: grey;
     cursor: auto;
     width: 395px;
 }
@@ -22,21 +22,22 @@
     flex-direction: column;
     justify-content: center;
     margin: auto;
+    margin: 5px;
     padding: 10px;
     width: 400px;
-    margin: 5px;
 }
 #reviewText {
-    width: 390px;
+    font-family: inherit;
     height: 100px;
     margin: 5px 0px;
+    width: 390px;
 }
 .rating {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    width: inherit;
-    align-items: center;
     justify-content: center;
+    width: inherit;
 }
 #starsButton {
     background-color: transparent;

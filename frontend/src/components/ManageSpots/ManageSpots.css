@@ -9,25 +9,24 @@
 }
 #spotButton {
     background-color: grey;
-  
-    text-decoration: none;
+    border: 1px solid black;
     color: white;
     padding: 2px;
-    border: 1px solid black;
+    text-decoration: none;
 }
 .editButtons {
-    display: flex;
-    position: relative;
-    justify-content: left;
     align-items: center;
+    display: flex;
+    justify-content: left;
+    position: relative;
 }
 #manageSpotsHeader {
     display: block;
     padding: 10px;
 }
 .manageSpotImage {
-    width: 300px;
     height: 200px;
+    width: 300px;
 }
 #manageSpotButton {
     background-color: grey;
@@ -36,7 +35,7 @@
     color: white;
     cursor: pointer;
     font-family: inherit;
-    margin: 5px;
-    height: 23px;
     font-size: 14px;
+    height: 23px;
+    margin: 5px;
 }

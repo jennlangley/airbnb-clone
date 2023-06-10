@@ -20,8 +20,8 @@
 #hostedByAndDescription {
     display: flex;
     flex-direction: column;
-    width: 600px;
     max-width: 100%;
+    width: 600px;
 }
 #spotPriceInfo {
     border: 3px solid black;
@@ -62,41 +62,42 @@
 }
 .spotImages {
     display: grid;
+    max-width: 1000px;
+
     grid-template-areas: "image1 image2 image3"
                          "image1 image4 image5";
-    max-width: 1000px;
 }
 #detailImage1 {
-    width: 500px;
-    max-width:100%;
     grid-area: image1;
     height: 303px;
+    max-width:100%;
+    width: 500px;
 }
 #detailImage2 {
-    width: 250px;
+    grid-area: image2;
     height: 150px;
     max-width:100%;
-    grid-area: image2;
     padding: 0px 3px 3px;
+    width: 250px;
 }
 #detailImage3 {
-    width: 250px;
+    grid-area: image3;
     height: 150px;
     max-width: 100%;
-    grid-area: image3;
+    width: 250px;
 }
 #detailImage4 {
-    width: 250px;
+    grid-area: image4;
     height: 150px;
     max-width:1 00%;
-    grid-area: image4;
     padding: 0px 3px 3px;
+    width: 250px;
 }
 #detailImage5 {
-    width: 250px;
+    grid-area: image5;
     height: 150px;
     max-width: 100%;
-    grid-area: image5;
+    width: 250px;
 }
 #postReviewButton {
     background-color: grey;
@@ -117,12 +118,12 @@
     }
     .spotImages {
         display: flex;
-        max-width: 100%;
         flex-wrap: wrap;
+        max-width: 100%;
     }
     #detailImage1, #detailImage2, #detailImage3, #detailImage4, #detailImage5 {
-        padding: 2px;
         height: 300px;
+        padding: 2px;
         width: 500px;
     }
 }

@@ -22,9 +22,9 @@
 }
 #signupButton:disabled {
     background-color: white;
-    color: grey;
     border: 2px solid grey;
     box-shadow: 5px 5px grey;
+    color: grey;
     cursor: auto;
     width: 395px;
 }

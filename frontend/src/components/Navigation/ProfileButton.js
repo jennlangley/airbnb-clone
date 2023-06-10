@@ -46,7 +46,7 @@ const ProfileButton = ({ user }) => {
             </div>
             {user && 
                 <ul className={ulClassName} ref={ulRef}>
-                    <li>Hello, {user.username}</li>
+                    <li>Hello, {user.firstName}</li>
                     <li style={{borderBottom: "1px solid black"}}>{user.email}</li>
                     <li style={{borderBottom: "1px solid black"}} onClick={e => setShowMenu(false)}>
                         <Link to="/spots/current">

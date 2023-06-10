@@ -1,36 +1,51 @@
 .spotFormContainer {
     align-items: center;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
 }
 .spotForm {
     display: inline-flex;
     flex-direction: column;
     width: 500px;
-   
 }
 #createSpotButton {
     background-color: grey;
     border: 2px solid black;
+    bottom: 0px;
     box-shadow: 2px 2px black;
     color: white;
     cursor: pointer;
     font-family: inherit;
-    width: fit-content;
-    position: relative; 
-    margin-left: -50px;
     left: 50%;
-    bottom: 0px;
+    margin-left: -50px;
+    position: relative;
+    width: fit-content;
 }
 #inputSpotPrice {
     width: 478px;
 }
 #spotFormDescription {
+    font-family: inherit;
     height: 100px;
     width: 478px;
-    margin-bottom: 10px;
 }
 #description {
     border-bottom: 2px solid grey;
+}
+.inputBox {
+    display: inline-flex;
+    flex-direction: column;
+    padding-right: 2px;
+    width: 50%;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+}
+#commaForInput {
+    font-size: 20px;
+    padding-right: 5px;
+    position: relative;
+    top: 26px;
 }

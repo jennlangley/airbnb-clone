@@ -34,11 +34,18 @@ const SpotForm = () => {
             if (!state.length) errors.state = "State is required";
             if (description.length < 30) errors.description = "Description needs 30 or more characters";
             if (!previewImage.length) errors.image =  "Preview Image is required";
+            if (!(previewImage.endsWith('.png') || previewImage.endsWith('.jpg') || previewImage.endsWith('.jpeg'))) errors.imageName = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageTwo && !(imageTwo.endsWith('.png') || imageTwo.endsWith('.jpg') || imageTwo.endsWith('.jpeg'))) errors.imageNameTwo = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageThree && !(imageThree.endsWith('.png') || imageThree.endsWith('.jpg') || imageThree.endsWith('.jpeg'))) errors.imageNameThree = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageFour && !(imageFour.endsWith('.png') || imageFour.endsWith('.jpg') || imageFour.endsWith('.jpeg'))) errors.imageNameFour = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageFive && !(imageFive.endsWith('.png') || imageFive.endsWith('.jpg') || imageFive.endsWith('.jpeg'))) errors.imageNameFive = "Image URL must end in .png, .jpg, or .jpeg";
             if (!name.length) errors.name = "Name is required";
             if (!price.length) errors.price = "Price per day is required";
+            if (!lat) setLat(1);
+            if (!lng) setLng (1);
             setErrors(errors);  
         } 
-    }, [hasSubmitted, country, address, city, state, description, previewImage, name, price])
+    }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -105,36 +112,51 @@ const SpotForm = () => {
                     onChange={e => setAddress(e.target.value)}
                     placeholder='Address'
                 />
-                <label>City
-                {errors.city && (<span className='errors'> {errors.city}</span>)}
-                </label>
-                <input 
-                    value={city}
-                    onChange={e => setCity(e.target.value)}
-                    placeholder='City'
-                />
-                <span>,</span>
-                <label>State
-                {errors.state && (<span className='errors'> {errors.state}</span>)}
-                </label>
-                <input 
-                    value={state}
-                    onChange={e => setState(e.target.value)}
-                    placeholder='STATE'
-                />
+                <div className='inputContainer'>
+                    <div style={{width: '65%'}} className='inputBox'>
+                        <label>City
+                        {errors.city && (<span className='errors'> {errors.city}</span>)}
+                        </label>
+                        <input 
+                            value={city}
+                            onChange={e => setCity(e.target.value)}
+                            placeholder='City'
+                        />
+                        
+                    </div>
+                    <span id='commaForInput'>,</span>
+                    <div className='inputBox'>
+                        <label>State
+                        {errors.state && (<span className='errors'> {errors.state}</span>)}
+                        </label>
+                        <input 
+                            value={state}
+                            onChange={e => setState(e.target.value)}
+                            placeholder='STATE'
+                        />
+                    </div>
+                    
+                </div>
+                <div className='inputContainer'>
+                    <div className='inputBox'>
+                        <label>Latitude</label>
+                        <input
+                            value={lat}
+                            onChange={e => setLat(e.target.value)}
+                            placeholder='Latitude'
+                        />
+                    </div>
+                    <span id='commaForInput'>,</span>
+                    <div className='inputBox'>
+                        <label>Longitude</label>
+                        <input
+                            value={lng}
+                            onChange={e => setLng(e.target.value)}
+                            placeholder='Longitude'
+                        />
+                    </div>
+                </div>
                 
-                <label>Latitude</label>
-                <input
-                    value={lat}
-                    onChange={e => setLat(e.target.value)}
-                    placeholder='Latitude'
-                />
-                <label>Longitude</label>
-                <input
-                    value={lng}
-                    onChange={e => setLng(e.target.value)}
-                    placeholder='Longitude'
-                />
                 <div id='description'>
                     <h2>Describe your place to guests</h2>
                     <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
@@ -176,26 +198,31 @@ const SpotForm = () => {
                     placeholder='Preview Image URL'
                 />
                 {errors.image && (<span className='errors'>{errors.image}</span>)}
+                {errors.imageName && (<span className='errors'>{errors.imageName}</span>)}
                 <input 
                     value={imageTwo}
                     onChange={e => setImageTwo(e.target.value)}
                     placeholder='Image URL' 
                 />
+                {errors.imageNameTwo && (<span className='errors'>{errors.imageNameTwo}</span>)}
                 <input 
                     value={imageThree}
                     onChange={e => setImageThree(e.target.value)}
                     placeholder='Image URL' 
                 />
+                {errors.imageNameThree && (<span className='errors'>{errors.imageNameThree}</span>)}
                 <input 
                     value={imageFour}
                     onChange={e => setImageFour(e.target.value)}
                     placeholder='Image URL' 
                 />
+                {errors.imageNameFour && (<span className='errors'>{errors.imageNameFour}</span>)}
                 <input 
                     value={imageFive}
                     onChange={e => setImageFive(e.target.value)}
                     placeholder='Image URL' 
                 />
+                {errors.imageNameFive && (<span className='errors'>{errors.imageNameFive}</span>)}
                 <button id='createSpotButton' type="submit">Create Spot</button>
             </form>
         </div>
