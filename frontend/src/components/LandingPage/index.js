@@ -1,14 +1,27 @@
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import SpotTile from "../SpotTile/SpotTile";
+import * as spotsActions from '../../store/spots';
 import './LandingPage.css'
+import { useEffect } from "react";
 
 
 const LandingPage = () => {
-    const spots = useSelector(state => state.spots)
+    const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState(false);
+    useEffect(() => {
+        dispatch(spotsActions.loadAllSpots()).then(() => setIsLoaded(true))
+    }, [dispatch]);
+    const spots = useSelector(state => state.spots);
     return (
-        <div className="spotTiles">
-        {Object.values(spots).map(spot => <SpotTile key={spot.id} spot={spot}/>)}
-        </div>
+        <>
+            {isLoaded &&
+                (<div className="spotTiles">
+                {spots && Object.values(spots).map(spot => <SpotTile key={spot.id} spot={spot}/>)}
+                </div>)
+            }
+        </>
     );
 }
 export default LandingPage;
