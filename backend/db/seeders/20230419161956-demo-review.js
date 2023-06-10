@@ -46,14 +46,12 @@ module.exports = {
         review: 'Very great spot but there was rodent activity',
         stars: 4
       },
-    ], {});
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
-      userId: {  [Op.in]: [1, 2, 3] }
-    }, {});
+    return queryInterface.bulkDelete(options);
   }
 };

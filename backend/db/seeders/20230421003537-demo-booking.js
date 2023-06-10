@@ -28,14 +28,11 @@ module.exports = {
         startDate: '2023-11-01',
         endDate: '2023-11-04'
       },
-    ], {});
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Bookings';
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
-      id: {  [Op.in]: [1, 2, 3] }
-    }, {});
+    return queryInterface.bulkDelete(options);
   }
 };

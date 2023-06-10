@@ -70,14 +70,11 @@ module.exports = {
         description: 'That\'s right, the house is shaped like a guitar! But for good reason. The property was designed by country music star, Elvis Carden, back in 1986. What better way to celebrate his career than by building a house shaped like his favourite instrument? Complete with a curving body, long fret board and a headstock, the roof even features a bridge and a faux soundhole (formed from a circular skylight). The pad was Carden\'s home for many years, but it also acted as his muse...',
         price: '350',
       }
-    ], {});
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Spots';
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
-      name: {  [Op.in]: ['Underground House', 'Mushroom House', 'Whale House', 'Flintstone House', 'Guitar House'] }
-    }, {});
+    return queryInterface.bulkDelete(options);
   }
 };
