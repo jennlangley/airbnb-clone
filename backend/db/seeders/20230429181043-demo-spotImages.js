@@ -62,27 +62,17 @@ module.exports = {
       },
       {
         spotId: 3,
-        url: "https://img.atlasobscura.com/MwBikmplp2D6JXAkzeN8H6Ko6OIJ_2KEuII79U7fh3s/rt:fit/h:390/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy9jN2Jm/ZGRmYS04YWIwLTQ2/OTYtODkyZi0xOWZj/MDk2ZjUyMDdhNDZj/MTdhZDkxMjkwMjc0/OWNfTXFkWVBUUEEu/anBlZw.jpg",
+        url: "https://i.pinimg.com/originals/5d/1f/4b/5d1f4b9477eec0fc205cd17c2505eaf8.jpg",
         preview: true
       },
       {
         spotId: 3,
-        url: "https://img.atlasobscura.com/N4aJPGV7G1sUS4bRq2qlt2G5tFDajCqrFopvnGeBkfg/rt:fit/h:390/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy85ZDM1/MDY3Mi0yZGQyLTQ3/MmEtYTA4Yi05MWMx/NjAxOTc1ZmQxOGJi/ZmY5OGZlYjhjNzE3/NTVfdThiQWR6eVEu/anBlZw.jpg",
+        url: "https://i0.wp.com/www.thehamiltoncoblog.com/wp-content/uploads/2014/02/8.jpg?ssl=1",
         preview: false
       },
       {
         spotId: 3,
-        url: "https://img.atlasobscura.com/cE6h6-VGtLlM1MnbqiWcv2hVwwAm0yTiNNzKaZXywFg/rt:fit/h:390/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy84ZTE4/ZWM2NS1kOWNkLTRh/ZGYtOTZmYy01MTdh/OWU0Mzk1MzMxOGJi/ZmY5OGZlYjhjNzE3/NTVfc25nRUNTOHcu/anBlZw.jpg",
-        preview: false
-      },
-      {
-        spotId: 3,
-        url: "https://img.atlasobscura.com/cEXoBQ-ElRsgCMxljoKRfCDooI3MejBsd3xznYtCRu0/rt:fit/h:390/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy8yODI0/MTQ1My1jMGY0LTQw/MjgtOTE0Mi1lOGZk/OWRmYmZlY2JhNDZj/MTdhZDkxMjkwMjc0/OWNfVm9adWFycFEu/anBlZw.jpg",
-        preview: false
-      },
-      {
-        spotId: 3,
-        url: "https://img.atlasobscura.com/Rh8RzCGyN9UUMG5x3619drJAWDlvio-LJBNbMzO9FhQ/rt:fit/w:1200/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy85ZWFl/ZWM5Ny0wNTkyLTQ4/ZGYtYjViMC03ZjZl/YjQ2NDFhNjExOGJi/ZmY5OGZlYjhjNzE3/NTVfMkJaelNWV0Eu/anBlZw.jpg",
+        url: "https://gallery.streamlinevrs.com/units-gallery/00/01/5E/image_149064798.jpeg",
         preview: false
       },
       {
