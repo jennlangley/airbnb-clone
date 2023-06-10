@@ -45,7 +45,7 @@ const SpotForm = () => {
             if (!lng) setLng (1);
             setErrors(errors);  
         } 
-    }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive])
+    }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive, lat, lng])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -18,7 +18,7 @@ const LandingPage = () => {
         <>
             {isLoaded &&
                 (<div className="spotTiles">
-                {spots && Object.values(spots).map(spot => <SpotTile key={spot.id} spot={spot}/>)}
+                {spots && Object.values(spots).reverse().map(spot => <SpotTile key={spot.id} spot={spot}/>)}
                 </div>)
             }
         </>
