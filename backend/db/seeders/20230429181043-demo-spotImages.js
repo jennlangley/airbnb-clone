@@ -85,6 +85,47 @@ module.exports = {
         url: "https://img.atlasobscura.com/Rh8RzCGyN9UUMG5x3619drJAWDlvio-LJBNbMzO9FhQ/rt:fit/w:1200/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy85ZWFl/ZWM5Ny0wNTkyLTQ4/ZGYtYjViMC03ZjZl/YjQ2NDFhNjExOGJi/ZmY5OGZlYjhjNzE3/NTVfMkJaelNWV0Eu/anBlZw.jpg",
         preview: false
       },
+      {
+        spotId: 4,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/2b781887-221f-47a2-b49e-2f8fb3bf6882-americas-weirdest-homes-flintstone-house-ext.jpg',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/c6214776-0302-42d0-a555-dba67919cf12-americas-weirdest-homes-flintstone-house.jpg',
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/7963b4a9-db5a-4cee-b1eb-11f9691a72b1-americas-weirdest-homes-flintstone-house-lounge.jpg',
+        preview: false,
+      },
+      {
+        spotId: 4,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/9ae61b78-9e19-476f-a1fb-a302552ddbb1-americas-weirdest-homes-flintstone-house-kitchen.jpg',
+        preview: false,
+      },
+      {
+        spotId: 5,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/14371ed9-e400-4d01-9473-c834aa810ea6-weirdest-homes-in-america-guitar-house-ariel.jpg',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/396643f9-6097-4457-9db6-6ac8c1cf7cc1-weirdest-homes-in-america-guitar-house.jpg',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/de0bc2fd-7cc4-46d0-9559-84c8894adfd7-weirdest-homes-in-america-guitar-house-inside.jpg',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/cbcdc3d4-2ece-4eaa-939c-c471ba972b06-weirdest-homes-in-america-guitar-house-bedroom.jpg',
+        preview: false
+      }
+
     ], {});
   },
 
@@ -92,7 +133,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: {  [Op.in]: [1, 2, 3] }
+      spotId: {  [Op.in]: [1, 2, 3, 4, 5] }
     }, {});
   }
 };

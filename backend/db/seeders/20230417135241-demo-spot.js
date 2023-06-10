@@ -45,6 +45,30 @@ module.exports = {
         name: 'Whale House',
         description: 'Built in 1978, this artful expression of one man\'s vision blends design, nature\'s beauty, and a clever sense of humor!  Inspired by the fanciful creations of renowned Architect Antonio Gaudi, Michael Carmichael (Architect and original owner/builder) let his imagination run wild.  The result, one of the most awe-inspiring, mind-boggling homes in America!  The story begins, "...and then, the whale swallowed the entire ship!" The rest is pure hand-made artisan and architectural genius!',
         price: '1057.00',  
+      },
+      {
+        ownerId: 4,
+        address: '45 Berryessa Way',
+        city: 'Hillsborough',
+        state: 'CA',
+        country: 'United States',
+        lat: '37.53079',
+        lng: '-122.35916',
+        name: 'Flintstone House',
+        description: 'Located in the town of Hillsborough, California, this otherworldly house has attracted a fair amount of controversy over the years. Constructed in 1977 by architect William Nicholson, the property was bought by media mogul Florence Fang in 2017, who turned the already unusual house into a treasure trove of quirky furnishings and ornaments.',
+        price: '359',  
+      },
+      {
+        ownerId: 5,
+        address: '115 Wilkins Rd',
+        city: 'Fayetteville',
+        state: 'GA',
+        country: 'United States',
+        lat: 33.50936,
+        lng: -84.44103,
+        name: 'Guitar House',
+        description: 'That\'s right, the house is shaped like a guitar! But for good reason. The property was designed by country music star, Elvis Carden, back in 1986. What better way to celebrate his career than by building a house shaped like his favourite instrument? Complete with a curving body, long fret board and a headstock, the roof even features a bridge and a faux soundhole (formed from a circular skylight). The pad was Carden\'s home for many years, but it also acted as his muse...',
+        price: '350',
       }
     ], {});
   },
@@ -53,7 +77,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      name: {  [Op.in]: ['Underground House', 'Mushroom House', 'Whale House'] }
+      name: {  [Op.in]: ['Underground House', 'Mushroom House', 'Whale House', 'Flintstone House', 'Guitar House'] }
     }, {});
   }
 };

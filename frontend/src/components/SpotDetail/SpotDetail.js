@@ -18,8 +18,7 @@ const SpotDetail = () => {
     
     const spot = useSelector(state => state.spots[spotId]);
     const reviews = useSelector(state => state.reviews);
-    console.log(Object.keys(reviews).length)
-    console.log(spot)
+
     const user = useSelector(state => state.session.user);
     let userReview;
     user ? userReview = Object.values(reviews).filter(review => review.userId === user.id) : userReview = null;
