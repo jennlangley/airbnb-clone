@@ -19,7 +19,7 @@ function LoginForm() {
   };
   const demoLogin = (e) => {
     return dispatch(sessionActions.setSession({
-        credential: "Demo-lition",
+        credential: "jhenderson1",
         password: "password"
     }))
 }
