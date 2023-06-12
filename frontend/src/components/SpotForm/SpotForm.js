@@ -13,11 +13,11 @@ const SpotForm = () => {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [previewImage, setPreviewImage] = useState('');
     const [imageTwo, setImageTwo] = useState('');
     const [imageThree, setImageThree] = useState('');
@@ -41,8 +41,6 @@ const SpotForm = () => {
             if (imageFive && !(imageFive.endsWith('.png') || imageFive.endsWith('.jpg') || imageFive.endsWith('.jpeg'))) errors.imageNameFive = "Image URL must end in .png, .jpg, or .jpeg";
             if (!name.length) errors.name = "Name is required";
             if (!price.length) errors.price = "Price per day is required";
-            if (!lat) setLat(1);
-            if (!lng) setLng (1);
             setErrors(errors);  
         } 
     }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive, lat, lng])
@@ -52,6 +50,8 @@ const SpotForm = () => {
         setHasSubmitted(true);
         if (!Object.values(errors).length) {
             try {
+                if (!lat) setLat(0);
+                if (!lng) setLng (0);
                 const newSpot = {
                     address, city, state, country, lat, lng, name, description, price
                 };
@@ -141,6 +141,7 @@ const SpotForm = () => {
                     <div className='inputBox'>
                         <label>Latitude</label>
                         <input
+                            type='number'
                             value={lat}
                             onChange={e => setLat(e.target.value)}
                             placeholder='Latitude'
@@ -150,6 +151,7 @@ const SpotForm = () => {
                     <div className='inputBox'>
                         <label>Longitude</label>
                         <input
+                            type='number'
                             value={lng}
                             onChange={e => setLng(e.target.value)}
                             placeholder='Longitude'

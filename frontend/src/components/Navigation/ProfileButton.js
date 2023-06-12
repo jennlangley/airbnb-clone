@@ -54,7 +54,7 @@ const ProfileButton = ({ user }) => {
                         </Link>
                     </li>
                     <li>
-                        <span className="logoutButton" onClick={logout}>Log Out</span>
+                        <button className="logoutButton" onClick={logout}>Log Out</button>
                     </li>
             </ul>}
             {!user && 

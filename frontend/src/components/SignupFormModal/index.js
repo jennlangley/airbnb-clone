@@ -5,7 +5,7 @@ function SignupFormModal() {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <span onClick={() => setShowModal(true)} style={{cursor: "pointer"}}>Sign Up</span>
+      <button className="dropDownButton" onClick={() => setShowModal(true)}>Sign Up</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <SignupForm />

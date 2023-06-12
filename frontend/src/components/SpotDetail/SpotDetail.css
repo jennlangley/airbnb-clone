@@ -17,6 +17,10 @@
     flex-direction: row;
     justify-content: space-between;
 }
+#spotDescriptionOnly {
+    max-width: 600px;
+    word-wrap: break-word;
+}
 #hostedByAndDescription {
     display: flex;
     flex-direction: column;

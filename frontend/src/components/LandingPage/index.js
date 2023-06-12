@@ -11,7 +11,7 @@ const LandingPage = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-        dispatch(spotsActions.loadAllSpots()).then(() => setIsLoaded(true))
+        dispatch(spotsActions.loadAllSpots()).then(() => setIsLoaded(true));
     }, [dispatch]);
     const spots = useSelector(state => state.spots);
     return (

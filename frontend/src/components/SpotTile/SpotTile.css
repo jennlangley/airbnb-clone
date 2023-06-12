@@ -2,17 +2,18 @@
     height: 180px;
     width: 240px;
 }
-
 .spotTile {
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 6px;
 }
 .spotTile:hover {
-    background-color: grey;
+    background-color: #A458A2;
+    border: 2px solid #A458A2;
     border-radius: 10px;
     color: white;
     font-weight: bold;
+    padding: 4px;
 }
 .spotInfo {
     display: flex;
@@ -34,4 +35,25 @@
 .spotLink {
     color: inherit;
     text-decoration: none;
+}
+.tooltip {
+    padding: none;
+}
+.tooltip:before {
+    background-color: #A458A2;
+    color: #fff;
+    content: attr(data-text);
+    display: none;
+    position: absolute;
+    text-align: center;
+    width: 240px;
+}
+.tooltip:hover:before {
+    display: block;
+}
+.tooltip.manageSpotTile:before {
+    width: 300px;
+}
+.tooltip.landingSpotTile:before {
+    width: 240px;
 }

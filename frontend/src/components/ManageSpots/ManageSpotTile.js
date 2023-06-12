@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-
 import DeleteModal from '../DeleteSpotModal/DeleteFormModal';
 const ManageSpotTile = ({ spot }) => {
 
     return (
         <div id='manageSpotContainer'>
         <Link to={`/spots/${spot.id}`} className="spotLink">
-            <div title={spot.name} className="spotTile">
+            <div className="spotTile tooltip manageSpotTile" data-text={spot.name}>
                 <div>
                         <img 
                             className="manageSpotImage" 
