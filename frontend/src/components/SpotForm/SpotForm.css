@@ -21,6 +21,8 @@
     margin-left: -50px;
     position: relative;
     width: fit-content;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 #inputSpotPrice {
     width: 478px;
@@ -28,15 +30,16 @@
 #spotFormDescription {
     font-family: inherit;
     height: 100px;
-    width: 478px;
+    width: 494px;
 }
-#description {
+#endOfSection {
     border-bottom: 2px solid grey;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .inputBox {
     display: inline-flex;
     flex-direction: column;
-    padding-right: 2px;
     width: 50%;
 }
 .inputContainer {
@@ -48,4 +51,11 @@
     padding-right: 5px;
     position: relative;
     top: 26px;
+}
+#titleInput {
+    width: 492px;
+}
+.spotImageInputs {
+    display: flex;
+    flex-direction: column;
 }

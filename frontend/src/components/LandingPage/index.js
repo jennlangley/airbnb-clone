@@ -1,11 +1,8 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import SpotTile from "../SpotTile/SpotTile";
 import * as spotsActions from '../../store/spots';
 import './LandingPage.css'
-import { useEffect } from "react";
-
 
 const LandingPage = () => {
     const dispatch = useDispatch();

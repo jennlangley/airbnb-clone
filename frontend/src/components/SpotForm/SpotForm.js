@@ -41,6 +41,8 @@ const SpotForm = () => {
             if (imageFive && !(imageFive.endsWith('.png') || imageFive.endsWith('.jpg') || imageFive.endsWith('.jpeg'))) errors.imageNameFive = "Image URL must end in .png, .jpg, or .jpeg";
             if (!name.length) errors.name = "Name is required";
             if (!price.length) errors.price = "Price per day is required";
+            if (!lat) setLat(1);
+            if (!lng) setLng (1);
             setErrors(errors);  
         } 
     }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive, lat, lng])
@@ -50,8 +52,6 @@ const SpotForm = () => {
         setHasSubmitted(true);
         if (!Object.values(errors).length) {
             try {
-                if (!lat) setLat(0);
-                if (!lng) setLng (0);
                 const newSpot = {
                     address, city, state, country, lat, lng, name, description, price
                 };
@@ -78,8 +78,8 @@ const SpotForm = () => {
         setAddress('');
         setCity('');
         setState('');
-        setLat(0);
-        setLng(0);
+        setLat('');
+        setLng('');
         setDescription('');
         setName('');
         setPrice('');
@@ -137,7 +137,7 @@ const SpotForm = () => {
                     </div>
                     
                 </div>
-                <div className='inputContainer'>
+                <div className='inputContainer' id='endOfSection'>
                     <div className='inputBox'>
                         <label>Latitude</label>
                         <input
@@ -159,7 +159,7 @@ const SpotForm = () => {
                     </div>
                 </div>
                 
-                <div id='description'>
+                <div id='endOfSection'>
                     <h2>Describe your place to guests</h2>
                     <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
                     <textarea 
@@ -170,17 +170,23 @@ const SpotForm = () => {
                     />
                     {errors.description && (<span className='errors'>{errors.description}</span>)}
                 </div>
-                <h2>Create a title for your spot</h2>
-                <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
-                <input 
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    placeholder='Name of your spot'
-                />
-                {errors.name && (<span className='errors'>{errors.name}</span>)}
+                <div id='endOfSection'>
+                    <h2>Create a title for your spot</h2>
+                    <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+                    <input 
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        placeholder='Name of your spot'
+                        id='titleInput'
+                    />
+                    {errors.name && (<span className='errors'>{errors.name}</span>)}
+                </div>
+                <div>
+                    
+                </div>
                 <h2>Set a base price for your spot</h2>
                 <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
-                <div>
+                <div id='endOfSection'>
                     <span>$ </span>
                     <input 
                         id='inputSpotPrice'
@@ -191,40 +197,42 @@ const SpotForm = () => {
                     />
                     {errors.price && (<span className='errors'>{errors.price}</span>)} 
                 </div>
+                <div id='endOfSection' className='spotImageInputs'>
+                    <h2>Liven up your spot with photos</h2>
+                    <p>Submit a link to at least one photo to publish your spot.</p>
+                    <input 
+                        value={previewImage}
+                        onChange={e => setPreviewImage(e.target.value)}
+                        placeholder='Preview Image URL'
+                    />
+                    {errors.image && (<span className='errors'>{errors.image}</span>)}
+                    {errors.imageName && (<span className='errors'>{errors.imageName}</span>)}
+                    <input 
+                        value={imageTwo}
+                        onChange={e => setImageTwo(e.target.value)}
+                        placeholder='Image URL' 
+                    />
+                    {errors.imageNameTwo && (<span className='errors'>{errors.imageNameTwo}</span>)}
+                    <input 
+                        value={imageThree}
+                        onChange={e => setImageThree(e.target.value)}
+                        placeholder='Image URL' 
+                    />
+                    {errors.imageNameThree && (<span className='errors'>{errors.imageNameThree}</span>)}
+                    <input 
+                        value={imageFour}
+                        onChange={e => setImageFour(e.target.value)}
+                        placeholder='Image URL' 
+                    />
+                    {errors.imageNameFour && (<span className='errors'>{errors.imageNameFour}</span>)}
+                    <input 
+                        value={imageFive}
+                        onChange={e => setImageFive(e.target.value)}
+                        placeholder='Image URL' 
+                    />
+                    {errors.imageNameFive && (<span className='errors'>{errors.imageNameFive}</span>)}
+                </div>
                 
-                <h2>Liven up your spot with photos</h2>
-                <p>Submit a link to at least one photo to publish your spot.</p>
-                <input 
-                    value={previewImage}
-                    onChange={e => setPreviewImage(e.target.value)}
-                    placeholder='Preview Image URL'
-                />
-                {errors.image && (<span className='errors'>{errors.image}</span>)}
-                {errors.imageName && (<span className='errors'>{errors.imageName}</span>)}
-                <input 
-                    value={imageTwo}
-                    onChange={e => setImageTwo(e.target.value)}
-                    placeholder='Image URL' 
-                />
-                {errors.imageNameTwo && (<span className='errors'>{errors.imageNameTwo}</span>)}
-                <input 
-                    value={imageThree}
-                    onChange={e => setImageThree(e.target.value)}
-                    placeholder='Image URL' 
-                />
-                {errors.imageNameThree && (<span className='errors'>{errors.imageNameThree}</span>)}
-                <input 
-                    value={imageFour}
-                    onChange={e => setImageFour(e.target.value)}
-                    placeholder='Image URL' 
-                />
-                {errors.imageNameFour && (<span className='errors'>{errors.imageNameFour}</span>)}
-                <input 
-                    value={imageFive}
-                    onChange={e => setImageFive(e.target.value)}
-                    placeholder='Image URL' 
-                />
-                {errors.imageNameFive && (<span className='errors'>{errors.imageNameFive}</span>)}
                 <button id='createSpotButton' type="submit">Create Spot</button>
             </form>
         </div>
