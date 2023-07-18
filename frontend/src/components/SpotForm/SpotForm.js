@@ -41,8 +41,8 @@ const SpotForm = () => {
             if (imageFive && !(imageFive.endsWith('.png') || imageFive.endsWith('.jpg') || imageFive.endsWith('.jpeg'))) errors.imageNameFive = "Image URL must end in .png, .jpg, or .jpeg";
             if (!name.length) errors.name = "Name is required";
             if (!price.length) errors.price = "Price per day is required";
-            if (!lat) setLat(1);
-            if (!lng) setLng (1);
+            if (!lat) errors.lat = "Invalid latitude"
+            if (!lng) errors.lng = "Invalid longitude";
             setErrors(errors);  
         } 
     }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive, lat, lng])
@@ -139,7 +139,9 @@ const SpotForm = () => {
                 </div>
                 <div className='inputContainer' id='endOfSection'>
                     <div className='inputBox'>
-                        <label>Latitude</label>
+                        <label>Latitude
+                        {errors.lat && (<span className='errors'> {errors.lat}</span>)}
+                        </label>
                         <input
                             type='number'
                             value={lat}
@@ -149,7 +151,9 @@ const SpotForm = () => {
                     </div>
                     <span id='commaForInput'>,</span>
                     <div className='inputBox'>
-                        <label>Longitude</label>
+                        <label>Longitude
+                        {errors.lng && (<span className='errors'> {errors.lng}</span>)}
+                        </label>
                         <input
                             type='number'
                             value={lng}
