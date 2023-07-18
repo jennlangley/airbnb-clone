@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import DeleteModal from '../DeleteSpotModal/DeleteFormModal';
+import DeleteModal from '../../Modals/DeleteSpotModal/DeleteFormModal';
 const ManageSpotTile = ({ spot }) => {
 
     return (

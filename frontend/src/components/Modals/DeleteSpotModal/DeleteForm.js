@@ -1,4 +1,4 @@
-import * as spotsActions from '../../store/spots';
+import * as spotsActions from '../../../store/spots';
 import { useDispatch } from 'react-redux';
 import './DeleteForm.css'
 const DeleteForm = ({ spotId }) => {

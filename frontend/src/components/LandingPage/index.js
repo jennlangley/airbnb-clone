@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import SpotTile from "../SpotTile/SpotTile";
+import SpotTile from "../Spots/SpotTile/SpotTile";
 import * as spotsActions from '../../store/spots';
 import './LandingPage.css'
 

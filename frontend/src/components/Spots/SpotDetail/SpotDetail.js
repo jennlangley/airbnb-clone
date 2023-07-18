@@ -2,10 +2,10 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
 import './SpotDetail.css';
-import * as spotsActions from '../../store/spots';
-import * as reviewsActions from '../../store/reviews';
-import Reviews from '../Reviews/Reviews';
-import CreateReviewModal from '../CreateReviewModal/CreateReviewModal';
+import * as spotsActions from '../../../store/spots';
+import * as reviewsActions from '../../../store/reviews';
+import Reviews from '../../Reviews/Reviews';
+import CreateReviewModal from '../../Modals/CreateReviewModal/CreateReviewModal';
 const SpotDetail = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsloaded] = useState(false);

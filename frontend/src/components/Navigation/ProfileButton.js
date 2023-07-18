@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+import LoginFormModal from '../Modals/LoginFormModal';
+import SignupFormModal from '../Modals/SignupFormModal';
 import * as sessionActions from '../../store/session';
 import { useHistory } from 'react-router-dom';
 

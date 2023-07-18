@@ -1,30 +1,28 @@
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import * as spotsActions from '../../store/spots';
-import '../SpotForm/SpotForm.css';
 
-const EditSpotForm = () => {
+import * as spotsActions from '../../../store/spots';
+import './SpotForm.css';
+
+const SpotForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { spotId } = useParams()
-    const spot = useSelector(state => state.spots[spotId])
-    
-    const [country, setCountry] = useState(spot.country);
-    const [address, setAddress] = useState(spot.address);
-    const [city, setCity] = useState(spot.city);
-    const [state, setState] = useState(spot.state);
-    const [lat, setLat] = useState(spot.lat);
-    const [lng, setLng] = useState(spot.lng);
-    const [description, setDescription] = useState(spot.description);
-    const [name, setName] = useState(spot.name);
-    const [price, setPrice] = useState(spot.price);
-    // const [previewImage, setPreviewImage] = useState(spot.previewImage);
-    // const [imageTwo, setImageTwo] = useState(spot.imageTwo || '');
-    // const [imageThree, setImageThree] = useState(spot.imageThree || '');
-    // const [imageFour, setImageFour] = useState(spot.imageFour || '');
-    // const [imageFive, setImageFive] = useState(spot.imageFive || '');
+
+    const [country, setCountry] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [previewImage, setPreviewImage] = useState('');
+    const [imageTwo, setImageTwo] = useState('');
+    const [imageThree, setImageThree] = useState('');
+    const [imageFour, setImageFour] = useState('');
+    const [imageFive, setImageFive] = useState('');
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     useEffect(() => {
@@ -35,12 +33,20 @@ const EditSpotForm = () => {
             if (!city.length) errors.city = "City is required";
             if (!state.length) errors.state = "State is required";
             if (description.length < 30) errors.description = "Description needs 30 or more characters";
-            // if (!previewImage.length) errors.image =  "Preview Image is required";
+            if (!previewImage.length) errors.image =  "Preview Image is required";
+            if (!(previewImage.endsWith('.png') || previewImage.endsWith('.jpg') || previewImage.endsWith('.jpeg'))) errors.imageName = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageTwo && !(imageTwo.endsWith('.png') || imageTwo.endsWith('.jpg') || imageTwo.endsWith('.jpeg'))) errors.imageNameTwo = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageThree && !(imageThree.endsWith('.png') || imageThree.endsWith('.jpg') || imageThree.endsWith('.jpeg'))) errors.imageNameThree = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageFour && !(imageFour.endsWith('.png') || imageFour.endsWith('.jpg') || imageFour.endsWith('.jpeg'))) errors.imageNameFour = "Image URL must end in .png, .jpg, or .jpeg";
+            if (imageFive && !(imageFive.endsWith('.png') || imageFive.endsWith('.jpg') || imageFive.endsWith('.jpeg'))) errors.imageNameFive = "Image URL must end in .png, .jpg, or .jpeg";
             if (!name.length) errors.name = "Name is required";
-            if (!price) errors.price = "Price per day is required";
+            if (!price.length) errors.price = "Price per day is required";
+            if (!lat) errors.lat = "Invalid latitude"
+            if (!lng) errors.lng = "Invalid longitude";
             setErrors(errors);  
         } 
-    }, [hasSubmitted, country, address, city, state, description, name, price])
+    }, [hasSubmitted, country, address, city, state, description, previewImage, name, price, imageTwo, imageThree, imageFour, imageFive, lat, lng])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
@@ -49,39 +55,45 @@ const EditSpotForm = () => {
                 const newSpot = {
                     address, city, state, country, lat, lng, name, description, price
                 };
-                const spot = await dispatch(spotsActions.updateSpot(newSpot, spotId))
-                
+                const spot = await dispatch(spotsActions.createSpot(newSpot));
+                await dispatch(spotsActions.createSpotImage(previewImage, true, spot.id));
+                if (imageTwo) await dispatch(spotsActions.createSpotImage(imageTwo, false, spot.id));
+                if (imageThree) await dispatch(spotsActions.createSpotImage(imageThree, false, spot.id));
+                if (imageFour) await dispatch(spotsActions.createSpotImage(imageFour, false, spot.id));
+                if (imageFive) await dispatch(spotsActions.createSpotImage(imageFive, false, spot.id));
                 if (spot) reset();
-                setErrors({});
-                setHasSubmitted(false);
                 
-                history.push(`/spots/${spotId}`);
+                setHasSubmitted(false);
+                setErrors({});
+                history.push(`/spots/${spot.id}`);
 
             } catch (error) {
                 return
             }
         } 
     };
+    
     const reset = () => {
         setCountry('');
         setAddress('');
         setCity('');
         setState('');
-        setLat(0);
-        setLng(0);
+        setLat('');
+        setLng('');
         setDescription('');
         setName('');
         setPrice('');
-        // setPreviewImage('');
-        // setImageTwo('');
-        // setImageThree('');
-        // setImageFour('');
-        // setImageFive('');
+        setPreviewImage('');
+        setImageTwo('');
+        setImageThree('');
+        setImageFour('');
+        setImageFive('');
     };
+
     return (
         <div className='spotFormContainer'>
             <form onSubmit={handleSubmit} className='spotForm'>
-                <h1>Update your Spot</h1>
+                <h1>Create a new Spot</h1>
                 <h2>Where's your place located?</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
                 <label>Country
@@ -127,7 +139,9 @@ const EditSpotForm = () => {
                 </div>
                 <div className='inputContainer' id='endOfSection'>
                     <div className='inputBox'>
-                        <label>Latitude</label>
+                        <label>Latitude
+                        {errors.lat && (<span className='errors'> {errors.lat}</span>)}
+                        </label>
                         <input
                             type='number'
                             value={lat}
@@ -137,7 +151,9 @@ const EditSpotForm = () => {
                     </div>
                     <span id='commaForInput'>,</span>
                     <div className='inputBox'>
-                        <label>Longitude</label>
+                        <label>Longitude
+                        {errors.lng && (<span className='errors'> {errors.lng}</span>)}
+                        </label>
                         <input
                             type='number'
                             value={lng}
@@ -185,7 +201,7 @@ const EditSpotForm = () => {
                     />
                     {errors.price && (<span className='errors'>{errors.price}</span>)} 
                 </div>
-                {/* <div id='endOfSection' className='spotImageInputs'>
+                <div id='endOfSection' className='spotImageInputs'>
                     <h2>Liven up your spot with photos</h2>
                     <p>Submit a link to at least one photo to publish your spot.</p>
                     <input 
@@ -220,10 +236,11 @@ const EditSpotForm = () => {
                     />
                     {errors.imageNameFive && (<span className='errors'>{errors.imageNameFive}</span>)}
                 </div>
-                 */}
-                <button id='createSpotButton' type="submit">Update Spot</button>
+                
+                <button id='createSpotButton' type="submit">Create Spot</button>
             </form>
         </div>
-    )
+    );
 }
-export default EditSpotForm;
+
+export default SpotForm;

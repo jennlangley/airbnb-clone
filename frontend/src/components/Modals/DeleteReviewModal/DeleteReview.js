@@ -1,5 +1,5 @@
-import * as reviewsActions from '../../store/reviews';
-import * as spotsActions from '../../store/spots';
+import * as reviewsActions from '../../../store/reviews';
+import * as spotsActions from '../../../store/spots';
 import { useDispatch } from 'react-redux';
 import './DeleteReview.css';
 const DeleteReview = ({ reviewId, spotId }) => {

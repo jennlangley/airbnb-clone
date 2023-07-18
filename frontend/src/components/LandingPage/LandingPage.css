@@ -6,3 +6,26 @@
     max-width: 1008px;
     position: relative;
 }
+
+@media (max-width: 1008px) {
+    .spotTiles {
+        max-width: 757px;
+    }
+}
+
+@media (max-width: 740px) {
+    .spotTiles {
+        max-width: 505px;
+    }
+}
+
+@media (max-width: 500px) {
+    .spotImage {
+        height: 240px;
+        width: 320px;
+    }
+
+    .spotTiles {
+        justify-content: center;
+    }
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as reviewsActions from '../../store/reviews';
+import * as reviewsActions from '../../../store/reviews';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import './CreateReview.css';

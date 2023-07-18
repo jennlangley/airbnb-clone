@@ -5,12 +5,12 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
-import SpotForm from "./components/SpotForm/SpotForm";
-import SpotDetail from "./components/SpotDetail/SpotDetail";
-import ManageSpots from "./components/ManageSpots/ManageSpots";
+import SpotForm from "./components/Spots/SpotForm/SpotForm";
+import SpotDetail from "./components/Spots/SpotDetail/SpotDetail";
+import ManageSpots from "./components/Spots/ManageSpots/ManageSpots";
 import * as sessionActions from './store/session';
 import * as spotsActions from './store/spots';
-import EditSpotForm from "./components/EditSpotForm/EditSpotForm";
+import EditSpotForm from "./components/Spots/EditSpotForm/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();

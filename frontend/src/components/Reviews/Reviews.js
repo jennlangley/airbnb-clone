@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import './Reviews.css';
-import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
+import DeleteReviewModal from '../Modals/DeleteReviewModal/DeleteReviewModal';
 const Reviews = ({ review, spotId }) => {
     const dateCreated = new Date(review.createdAt);
     const monthNames = ["January", "February", "March", "April", "May", "June",

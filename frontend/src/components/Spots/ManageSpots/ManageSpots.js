@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import ManageSpotTile from './ManageSpotTile';
-import * as spotsActions from '../../store/spots';
+import * as spotsActions from '../../../store/spots';
 import './ManageSpots.css';
 
 const ManageSpots = () => {

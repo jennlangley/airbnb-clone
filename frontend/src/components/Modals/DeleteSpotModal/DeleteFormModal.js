@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Modal } from '../../context/Modal';
-import DeleteForm from './DeleteForm';
+import { Modal } from '../../../context/Modal';
+import DeleteForm from './DeleteForm.js';
 
 function DeleteModal({ spotId }) {
   const [showModal, setShowModal] = useState(false);
