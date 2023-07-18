@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage";
 import SpotForm from "./components/Spots/SpotForm/SpotForm";
 import SpotDetail from "./components/Spots/SpotDetail/SpotDetail";
 import ManageSpots from "./components/Spots/ManageSpots/ManageSpots";
+import ManageReviews from './components/Reviews/ManageReviews/ManageReviews'
 import * as sessionActions from './store/session';
 import * as spotsActions from './store/spots';
 import EditSpotForm from "./components/Spots/EditSpotForm/EditSpotForm";
@@ -45,6 +46,10 @@ function App() {
           </Route>
           <Route path='/spots/:spotId'>
             <SpotDetail />
+          </Route>
+          <Route path='/reviews/current'>
+            <ManageReviews />
+
           </Route>
         </Switch>
       )}

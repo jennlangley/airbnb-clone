@@ -48,9 +48,15 @@ const ProfileButton = ({ user }) => {
                 <ul className={ulClassName} ref={ulRef}>
                     <li>Hello, {user.firstName}</li>
                     <li style={{borderBottom: "1px solid black"}}>{user.email}</li>
-                    <li style={{borderBottom: "1px solid black"}} onClick={e => setShowMenu(false)}>
+                    <li onClick={e => setShowMenu(false)}>
                         <Link to="/spots/current">
                             Manage Spots
+                        </Link>
+                        
+                    </li>
+                    <li style={{borderBottom: "1px solid black"}}>
+                        <Link to="/reviews/current">
+                            Manage Reviews
                         </Link>
                     </li>
                     <li>
