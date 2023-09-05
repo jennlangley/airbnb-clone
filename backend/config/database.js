@@ -9,10 +9,10 @@ module.exports = {
     typeValidation: true
   },
   production: {
-    define: {
+    use_env_variable: 'DATABASE_URL',
+    define: {      
       schema: process.env.SCHEMA
     },
-    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
     dialectOptions: {
