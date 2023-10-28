@@ -4,7 +4,7 @@ import './Map.css'
 
 export default function Home() {
     const { isLoaded } = useLoadScript({ 
-        googleMapsApiKey: "AIzaSyBRSMFPqkV3xbHdhTqXoIJIQI6xfSIGhlc",
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     });
 
     if (!isLoaded) return <div>Loading...</div>;
@@ -13,7 +13,7 @@ export default function Home() {
 } 
 
 function Map({ lat, lng}) {
-    const center = useMemo(() => ({ lat: lat, lng: lng }), []);
+    const center = useMemo(() => ({ lat: 20, lng: 40 }), []);
 
     return (
         <GoogleMap 
@@ -22,7 +22,7 @@ function Map({ lat, lng}) {
             mapContainerClassName="map-container"
         >
             <Marker
-            position={{lat: lat, lng: lng}}
+            position={{lat: 20, lng: 40}}
              />
         </GoogleMap>
     )
