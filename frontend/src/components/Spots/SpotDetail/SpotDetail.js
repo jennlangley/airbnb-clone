@@ -6,7 +6,7 @@ import * as spotsActions from '../../../store/spots';
 import * as reviewsActions from '../../../store/reviews';
 import Reviews from '../../Reviews/Reviews';
 import CreateReviewModal from '../../Modals/CreateReviewModal/CreateReviewModal';
-import Map from '../../Map/Map';
+import Home from '../../Map/Map';
 const SpotDetail = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsloaded] = useState(false);
@@ -27,7 +27,7 @@ const SpotDetail = () => {
     const reserveAlert = (e) => {
         alert("Feature coming soon!");
     };
-    console.log(spot.lat, spot.lng);
+
     return (
         isLoaded && (
             <div className='spotDetailContainer'>
@@ -54,7 +54,7 @@ const SpotDetail = () => {
                         </div>
                     </div>
                 </div>
-                <Map lat={parseFloat(spot.lat)} lng={parseFloat(spot.lng)} />
+                {spot && <Home lat={spot.lat} lng={spot.lng} />}
                 <div id='reviewContainer'>
                     <div id='reviewOverview'>
                         <p><i className="fa-solid fa-star"></i> {spot.avgRating || " New"} <span> {spot.numReviews? (" • " + spot.numReviews + (spot.numReviews === 1 ? " review" : " reviews")) : ""}</span></p>
