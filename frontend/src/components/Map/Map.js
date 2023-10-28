@@ -14,7 +14,7 @@ export default function Home({ lat, lng }) {
 
 function Map({ lat, lng }) {
 
-    const center = useMemo(() => ({ lat: lat, lng: lng }), []);
+    const center = useMemo(() => ({ lat: +lat, lng: +lng }), []);
 
     return (
         <GoogleMap 
@@ -23,7 +23,7 @@ function Map({ lat, lng }) {
             mapContainerClassName="map-container"
         >
             <Marker
-            position={{lat: lat, lng: lng}}
+            position={{lat: +lat, lng: +lng}}
              />
         </GoogleMap>
     )
